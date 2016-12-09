@@ -7,6 +7,5 @@ GM.Website = "N/A"
 DeriveGamemode("sandbox")
 
 // Here we will add the teams we've got
-team.SetUp( 1, "Joining", Color( 125, 125, 125, 255 ) )
-team.SetUp( 2, "Player", Color( 125, 125, 125, 255 ) )
-team.SetUp( 3, "Spectator", Color( 125, 125, 125, 255 ) )
+team.SetUp( 1, "Player", Color( 125, 125, 125, 255 ) )
+team.SetUp( 2, "Spectator", Color( 125, 125, 125, 255 ) )
