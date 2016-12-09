@@ -1,7 +1,7 @@
 "Power Battle"
 {
 	"base"		"base"
-	"title"		"Power Battle"
+	"title"		"Power Battle by DieEkteMan & Rowie"
 	"maps"		""
 	"menusystem"	"1"
 	"workshopid"	""
