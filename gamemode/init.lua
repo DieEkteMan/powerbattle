@@ -32,14 +32,21 @@ function GM:ShowTeam( ply )
 end
 
 function playerteam( len, ply )
+	if ply:Team() == 1 then
+		ply:ChatPrint("You are already on this team!")
+	else
 	ply:SetTeam(1);
 	ply:ChatPrint("You've been put into the playing team!");
 	ply:Spawn();
+	end
 end
 
 net.Receive("player",  playerteam ); // Team 1 
 
 function spectatorteam( len, ply )
+	if ply:Team() == 2 then
+		ply:ChatPrint("You are already on this team!")
+	else
 	ply:SetTeam(2);
 	ply:StripWeapons();
  	ply:ChatPrint("You are now spectating");
@@ -47,9 +54,3 @@ function spectatorteam( len, ply )
 end
 
 net.Receive("spectator", spectatorteam);
--- net.Receive("spectator", function(ply) // Team 2
--- 	ply:SetTeam(2)
--- 	ply:StripWeapons()
--- 	ply:ChatPrint("You are now spectating")
--- 	ply:Spectate(OBS_MODE_ROAMING)
--- end)
