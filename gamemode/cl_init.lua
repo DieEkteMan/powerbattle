@@ -13,10 +13,10 @@ net.Receive("f2menu", function()
 	else
 		MainMenu:SetVisible( true )
 	end
-	
+
 end)
 
-
-
-	//net.Start("spectator")
-    //net.SendToServer()
+net.Receive("welcomemsg", function()
+	local ply = LocalPlayer()
+	chat.AddText( Color( 100, 100, 255 ), "Welcome to our Power Battle Server! We hope you enjoy your stay!")
+end)
