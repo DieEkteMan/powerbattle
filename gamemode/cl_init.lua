@@ -30,4 +30,4 @@ team_2.DoClick = function()
 end
  
 end
-concommand.Add( "team_menu", set_team )
+net.Receive( "team_menu", set_team )
