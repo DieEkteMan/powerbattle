@@ -32,6 +32,8 @@ function GM:ScoreboardShow()
 			PlayerPanel.Paint = function()
 				draw.RoundedBox(0, 0, 0, PlayerPanel:GetWide(), PlayerPanel:GetTall(), Color(50, 50, 50, 255))
 				draw.RoundedBox(0, 0, 49, PlayerPanel:GetWide(), 1, Color(255, 255, 255, 255))
+				
+				draw.SimpleText(v:GetName(),'DermaDefault',20,10, Color(255,255,255))
 			end
 		end
 	
