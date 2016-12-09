@@ -1,7 +1,8 @@
 AddCSLuaFile( "cl_init.lua")
 AddCSLuaFile( "shared.lua")
 AddCSLuaFile( "vgui/main_menu.lua" )
-AddCSLuaFile( 'hud.lua' )
+AddCSLuaFile( 'vgui/hud.lua' )
+AddCSLuaFile( 'vgui/scoreboard.lua' )
 
 include( "shared.lua")
 
@@ -30,6 +31,7 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 
 	if ply:Team() == 1 then 
 		ply:Give( "weapon_smg1" )
+		ply:GiveAmmo(200, 'SMG1', true)
 		ply:Give( "weapon_spiderman")
 	elseif ply:Team() == 2 then
 		ply:StripWeapons()
