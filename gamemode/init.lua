@@ -1,19 +1,22 @@
 AddCSLuaFile( "cl_init.lua")
 AddCSLuaFile( "shared.lua")
+AddCSLuaFile( "vgui/main_menu.lua" )
 include( "shared.lua")
 
 // Network
-util.AddNetworkString("menu")
+util.AddNetworkString("f2menu")
 util.AddNetworkString("player")
 util.AddNetworkString("spectator")
+-- util.AddNetworkString("checkchosen")
+-- util.AddNetworkString("didntchoose")
 
-
-
-function GM:PlayerInitialSpawn(ply) // On the initial spawn we want to welcome to user and open up the team selecting menu
-		//ply:Spectate(OBS_MODE_ROAMING)
-		net.Start("menu")
+function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome to user and open up the team selecting menu
+		net.Start("f2menu")
 		net.Send(ply)
 		ply:ChatPrint("Welcome to our Power Battle Server!")
+		ply:SetTeam(2)
+		ply:StripWeapons();
+		ply:Spectate(OBS_MODE_ROAMING);
 end
 
 function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
@@ -22,12 +25,12 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 		ply:Give( "weapon_smg1" )
 		ply:Give( "weapon_spiderman")
 	elseif ply:Team() == 2 then
-		ply:Give()
+		ply:StripWeapons()
 	end
 end
 
 function GM:ShowTeam( ply )
-		net.Start("menu")
+		net.Start("f2menu")
 		net.Send( ply )
 end
 
@@ -45,12 +48,23 @@ net.Receive("player",  playerteam ); // Team 1
 
 function spectatorteam( len, ply )
 	if ply:Team() == 2 then
-		ply:ChatPrint("You are already on this team!")
+		ply:ChatPrint("You are already spectating!")
 	else
 	ply:SetTeam(2);
 	ply:StripWeapons();
  	ply:ChatPrint("You are now spectating");
  	ply:Spectate(OBS_MODE_ROAMING);
+ 	end
 end
 
 net.Receive("spectator", spectatorteam);
+
+-- function checkifchosen( len, ply )
+-- 	if ply:Team() == 3 then
+-- 		net.Start("didntchoose")
+-- 		net.Send(ply)
+-- 	else
+-- 		return false;
+-- end
+
+-- net.Receive("checkchosen", checkifchosen)

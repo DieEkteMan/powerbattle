@@ -1,0 +1,102 @@
+local PANEL = {
+	Init = function( self )
+
+	self:SetSize( 1000, 720)
+	self:Center()
+	self:SetVisible(true)
+	self:MakePopup()
+
+	local x, y = self:GetSize()
+
+	local button = vgui.Create( "DButton", self ) // Close button
+	button:SetText( "Close" )
+	button:SetSize( 50, 30)
+	button:SetPos( x - 50, 0)
+	function button:Paint( w, h )
+		if( button:IsDown() ) then
+			button:SetColor( Color( 150, 255, 150 ) )
+		elseif( button:IsHovered() ) then 
+			button:SetColor( Color( 200, 255, 200 ) )
+		else
+			button:SetColor( Color( 255, 255, 255 ) )
+		end
+	end
+	button.DoClick = function()
+		self:SetVisible( false )
+	end
+
+	local framename = vgui.Create( "DLabel", self )
+	framename:SetFont( "DermaLarge" )
+	framename:SetText( "PowerBattle F2 Menu" )
+	framename:SetPos( 4, 4 )
+	framename:SizeToContents()
+
+	
+
+
+
+
+
+	local mainpanel = vgui.Create( "DPanel", self )
+	mainpanel:SetPos( 3, 35 )
+	mainpanel:SetSize( x - 6, y - 35 - 3 )
+	mainpanel.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color( 100, 100, 100, 100 ) )
+	end
+
+	local colsheet = vgui.Create( "DColumnSheet", mainpanel )
+	colsheet:Dock( FILL )
+
+	local sheet1 = vgui.Create( "DPanel", colsheet )
+	sheet1:Dock( FILL )
+	sheet1.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color( 10, 10, 10, 100 ) )
+	end
+	colsheet:AddSheet( "Team Menu", sheet1, "icon16/star.png" )
+
+
+	local player = vgui.Create( "DButton", sheet1 ) // Team button
+	player:SetText( "Player" )
+	player:SetSize( 100, 100)
+	player:SetPos( 200, 60)
+	player.DoClick = function()
+		net.Start("player")
+		net.SendToServer()
+		self:SetVisible(false)
+	end
+
+	local spectator = vgui.Create( "DButton", sheet1 ) // Team Button
+	spectator:SetText( "Spectator" )
+	spectator:SetSize( 100, 100)
+	spectator:SetPos( 600, 60)
+	spectator.DoClick = function()
+		net.Start("spectator")
+		net.SendToServer()
+		self:SetVisible(false)
+	end
+
+	local sheet2 = vgui.Create( "DPanel", colsheet )
+	sheet2:Dock( FILL )
+	sheet2.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color( 10, 10, 10, 100 ) )
+	end
+	colsheet:AddSheet( "Credits", sheet2, "icon16/heart.png" )
+
+
+
+
+
+
+
+
+end,
+
+	Paint = function( self, w, h)
+
+		draw.RoundedBox( 0, 0, 0, w, h, Color( 10, 10, 10, 150 ) )
+		surface.SetDrawColor( 255, 255, 255, 255)
+
+	end
+	
+}
+vgui.Register( "main_menu", PANEL )
