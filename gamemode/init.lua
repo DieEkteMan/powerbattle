@@ -1,6 +1,8 @@
 AddCSLuaFile( "cl_init.lua")
 AddCSLuaFile( "shared.lua")
 AddCSLuaFile( "vgui/main_menu.lua" )
+AddCSLuaFile( 'hud.lua' )
+
 include( "shared.lua")
 
 // Network

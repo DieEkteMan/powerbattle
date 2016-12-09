@@ -1,5 +1,6 @@
 include( "shared.lua" )
 include( "vgui/main_menu.lua")
+include( 'hud.lua' )
 
 // Derma menu to choose team
 net.Receive("f2menu", function()
