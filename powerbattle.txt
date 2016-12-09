@@ -1,0 +1,8 @@
+"Power Battle"
+{
+	"base"		"base"
+	"title"		"Power Battle"
+	"maps"		""
+	"menusystem"	"1"
+	"workshopid"	""
+}
