@@ -9,14 +9,19 @@ util.AddNetworkString("player")
 util.AddNetworkString("spectator")
 -- util.AddNetworkString("checkchosen")
 -- util.AddNetworkString("didntchoose")
+util.AddNetworkString("welcomemsg")
 
 function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome to user and open up the team selecting menu
+		ply:SetTeam(3)
+		ply:Spectate(OBS_MODE_ROAMING)
+
+		net.Start("welcomemsg")
+		net.Send(ply)
+
 		net.Start("f2menu")
 		net.Send(ply)
-		ply:ChatPrint("Welcome to our Power Battle Server!")
-		ply:SetTeam(2)
-		ply:StripWeapons();
-		ply:Spectate(OBS_MODE_ROAMING);
+		//chat.AddText( Color( 100, 100, 255 ), "Welcome to our Power Battle Server", ply, " ! We hope you enjoy your stay!")
+		//ply:ChatPrint("Welcome to our Power Battle Server!")
 end
 
 function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
