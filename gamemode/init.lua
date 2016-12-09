@@ -26,23 +26,30 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 	end
 end
 
-function GM:ShowTeam(ply)
+function GM:ShowTeam( ply )
 		net.Start("menu")
-		net.Send(ply)
+		net.Send( ply )
 end
 
-net.Receive("player", function() // Team 1 
-	if pl:IsPlayer() then
+function playerteam( len, ply )
+	ply:SetTeam(1);
+	ply:ChatPrint("You've been put into the playing team!");
+	ply:Spawn();
+end
 
-	pl:SetTeam(1)
-	pl:ChatPrint("You've been put into the playing team!")
-	pl:Spawn()
-	end 
-end)
+net.Receive("player",  playerteam ); // Team 1 
 
-net.Receive("spectator", function() // Team 2
-	ply:SetTeam(2)
-	ply:StripWeapons()
-	ply:ChatPrint("You are now spectating")
-	ply:Spectate(OBS_MODE_ROAMING)
-end)
+function spectatorteam( len, ply )
+	ply:SetTeam(2);
+	ply:StripWeapons();
+ 	ply:ChatPrint("You are now spectating");
+ 	ply:Spectate(OBS_MODE_ROAMING);
+end
+
+net.Receive("spectator", spectatorteam);
+-- net.Receive("spectator", function(ply) // Team 2
+-- 	ply:SetTeam(2)
+-- 	ply:StripWeapons()
+-- 	ply:ChatPrint("You are now spectating")
+-- 	ply:Spectate(OBS_MODE_ROAMING)
+-- end)
