@@ -14,6 +14,3 @@ function SWEP:CustomAmmoDisplay()
 	return self.AmmoDisplay
 
 end
-
-function SWEP:SetWeaponHoldType( t )
-end

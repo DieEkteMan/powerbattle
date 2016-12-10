@@ -1,12 +1,12 @@
-
-SWEP.Author			= "Darkfortune, Rowie (For fixing)"
+SWEP.Author			= "GamerTech13 & Rowie"
+SWEP.Category 		= "SpiderMan"
 SWEP.Contact		= ""
-SWEP.Purpose		= "Allows you to swing all over the place!"
-SWEP.Instructions	= "Left click to shot web"
+SWEP.Purpose		= "Allows you to be Spider-Man"
+SWEP.Instructions	= "Left click to web swing\nRight Click to shoot webs"
 
-SWEP.Spawnable			= true
+SWEP.Spawnable			= false
 SWEP.AdminSpawnable		= true
-
+SWEP.HoldType 			= "pistol"
 SWEP.PrintName			= "Slinger"			
 SWEP.Slot				= 2
 SWEP.SlotPos			= 0
@@ -14,20 +14,31 @@ SWEP.DrawAmmo			= false
 SWEP.DrawCrosshair		= true
 SWEP.ViewModel			= "models/weapons/v_pistol.mdl"
 SWEP.WorldModel			= "models/weapons/w_pistol.mdl"
+SWEP.ViewModelFlip = true
+//if CLIENT then
+//SWEP.WepSelectIcon		= surface.GetTextureID( "weapons/spiderman" )
+	
+//killicon.Add( "weapon_spiderman", "killicons/weapon_spiderman", color_white )
+//end
 
 function SWEP:Initialize()
-
-	nextshottime = CurTime()
-	self:SetWeaponHoldType( "pistol" )
-	
+if CLIENT then
+self:SetWeaponHoldType("pistol")
+end
 end
 
 function SWEP:Think()
-
+	if !self.Owner:IsOnGround() then
+	self.Owner:SetAllowFullRotation(true)
+	elseif self.Owner:IsOnGround() then
+	self.Owner:SetAllowFullRotation(false)
+	end
 	if (!self.Owner || self.Owner == NULL) then return end
 	
 	if ( self.Owner:KeyPressed( IN_ATTACK ) ) then
-	
+		if CLIENT then
+		self:SetWeaponHoldType("pistol")
+		end
 		self:StartAttack()
 		
 	elseif ( self.Owner:KeyDown( IN_ATTACK ) && inRange ) then
@@ -35,15 +46,30 @@ function SWEP:Think()
 		self:UpdateAttack()
 		
 	elseif ( self.Owner:KeyReleased( IN_ATTACK ) && inRange ) then
-	
+		if CLIENT then
+		self:SetWeaponHoldType("pistol")
+		end
 		self:EndAttack( true )
 	
 	end
-	
+	if self.Owner:IsOnGround() then
+		if ( self.Owner:KeyPressed( IN_JUMP )) then
+			self.Owner:SetVelocity(self.Owner:GetUp() * 500)
+		end
+	end
 	if ( self.Owner:KeyPressed( IN_ATTACK2 ) ) then
-	
+		if CLIENT then
+		self:SetWeaponHoldType("pistol")
+		end
 		self:Attack2()
 		
+	end
+	if ( self.Owner:KeyReleased( IN_ATTACK2 ) ) then
+		if CLIENT then
+		timer.Simple(0.31, function()
+		self:SetWeaponHoldType("normal")
+		end)
+		end
 	end
 
 end
@@ -109,8 +135,9 @@ function SWEP:UpdateAttack()
 
 	self.Owner:LagCompensation( true )
 	
-	if (!endpos) then endpos = self.Tr.HitPos end
-	
+	disTrace = self.Owner:GetEyeTrace()
+	hitPos = disTrace.HitPos
+	endpos = self.Tr.HitPos
 	if (SERVER && self.Beam) then
 		self.Beam:GetTable():SetEndPos( endpos )
 	end
@@ -143,7 +170,7 @@ function SWEP:UpdateAttack()
 			vVel = vVel:GetNormalized()*(math.Clamp(Distance,0,7))
 				if( SERVER ) then
 				local gravity = GetConVarNumber("sv_Gravity")
-				vVel:Add(Vector(0,0,(gravity/100)*3))
+				vVel:Add(Vector(0,0,(gravity/100)*1.5))
 				if(zVel < 0) then
 					vVel:Sub(Vector(0,0,zVel/100))
 				end
@@ -178,20 +205,67 @@ function SWEP:Attack2()
 			self.Owner:SetFOV(90,.3)
 	end
 end
-
-function SWEP:Holster()
-	self:EndAttack( false )
+if SERVER then
+function SWEP:Deploy()
+	self.Owner.ShouldReduceFallDamage = true
 	return true
 end
-
+ 
+function SWEP:Holster()
+	self:EndAttack( false )
+	self.Owner.ShouldReduceFallDamage = false
+	return true
+end
+ 
+local function ReduceFallDamage(ent, dmginfo)
+	if ent:IsPlayer() and ent.ShouldReduceFallDamage and dmginfo:IsFallDamage() then
+		dmginfo:SetDamage(0)
+	end
+end
+ 
+hook.Add("EntityTakeDamage", "ReduceFallDamage", ReduceFallDamage)
+end
 function SWEP:OnRemove()
 	self:EndAttack( false )
 	return true
 end
-
-
 function SWEP:PrimaryAttack()
+	if not inRange then
+	self.Weapon:SendWeaponAnim(ACT_VM_SWINGMISS)
+	elseif inRange then
+	self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
+	timer.Simple(0.2, function()
+	self.Weapon:EmitSound("web/webfire.wav")
+	end)
+	timer.Simple(0.5, function() self.Weapon:SendWeaponAnim(ACT_VM_IDLE_LOWERED) end)
+	end
 end
-
 function SWEP:SecondaryAttack()
+self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
+self.Owner:EmitSound("web/webfire.wav")
+timer.Simple(0.31, function()
+local trace = self.Owner:GetEyeTrace()
+local effectdata = EffectData()
+local Hand1 = self.Owner:LookupBone("ValveBiped.Bip01_R_Hand")
+local Hand1Pos = self.Owner:GetBonePosition(Hand1)
+effectdata:SetStart( Hand1Pos )
+effectdata:SetOrigin( trace.HitPos )
+effectdata:SetScale( 100 )
+util.Effect( "web_fire", effectdata )
+local trace = self.Owner:GetEyeTrace()
+bullet = {}
+bullet.Num    = 1
+bullet.Src    = self.Owner:GetShootPos()
+bullet.Dir    = self.Owner:GetAimVector()
+bullet.Spread = Vector(0, 0, 0)
+bullet.Tracer = 0
+bullet.Force  = 5000
+bullet.Damage = 50
+self.Owner:FireBullets(bullet)
+end)
+timer.Simple(0.5, function() self:SendWeaponAnim(ACT_VM_IDLE_LOWERED) end)
+if CLIENT then
+self:SetWeaponHoldType("none")
+end
+self:SetNextSecondaryFire(CurTime() + 0.8)
 end

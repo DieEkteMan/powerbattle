@@ -1,7 +1,7 @@
 
 include('shared.lua')
 
-local matBeam		 	= Material( "cable/blue_elec" )
+local matBeam		 	= Material( "cable/xbeam" )
 
 /*---------------------------------------------------------
    Name: Initialize
