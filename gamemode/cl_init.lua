@@ -14,6 +14,14 @@ function GM:ContextMenuOpen()
 	return false
 end
 
+local function DisallowSpawnMenu( )
+	if not LocalPlayer():IsAdmin() then
+		return false
+	end
+end
+ 
+hook.Add( "SpawnMenuOpen", "DisallowSpawnMenu", DisallowSpawnMenu)
+
 // Derma menu to choose team
 net.Receive("f2menu", function()
 	if( !MainMenu ) then
