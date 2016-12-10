@@ -28,16 +28,12 @@ function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome
 		net.Send(ply)
 end
 
-function GM:PlayerSpawn( ply )
-		ply:SetMaterial( "sprites/heatwave" )
-end
-
 function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 
 	if ply:Team() == 1 then 
 		ply:Give( "weapon_smg1" )
 		ply:GiveAmmo(200, 'SMG1', true)
-		ply:SetModel( "models/player/kleiner.mdl" )
+		//ply:SetModel( "models/player/kleiner.mdl" )
 		//ply:Give( "weapon_spiderman")
 	elseif ply:Team() == 2 then
 		ply:StripWeapons()
