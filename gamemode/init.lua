@@ -31,6 +31,7 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 
 	if ply:Team() == 1 then 
 		ply:Give( "weapon_smg1" )
+		ply:Give( "pb_weapon_slinger" )
 		ply:GiveAmmo(200, 'SMG1', true)
 	elseif ply:Team() == 2 then
 		ply:StripWeapons()
