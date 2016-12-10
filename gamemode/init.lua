@@ -13,6 +13,7 @@ util.AddNetworkString("f4menu")
 util.AddNetworkString("player")
 util.AddNetworkString("spectator")
 util.AddNetworkString("getpowerup")
+util.AddNetworkString("Uncloak")
 -- util.AddNetworkString("checkchosen")
 -- util.AddNetworkString("didntchoose")
 util.AddNetworkString("welcomemsg")
@@ -93,10 +94,11 @@ net.Receive("spectator", spectatorteam);
 
 function getpowerup( len, ply )
 	ply:Give("pb_powerup_cloak")
-	ply:ChatPrint( "Test")
+	//ply:ChatPrint( "Test")
 end
 net.Receive( "getpowerup", getpowerup)
 
+net.Receive( "Uncloak", uncloak)
 
 
 local hooks = {

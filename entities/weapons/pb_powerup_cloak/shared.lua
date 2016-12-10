@@ -4,7 +4,7 @@ AddCSLuaFile()
 SWEP.Author 						=	"Rowie"
 SWEP.Base 							= "weapon_base"
 SWEP.PrintName 						= "Cloak"
-SWEP.Instructions 					= [[ Press Left Mouse Button to activate ]]
+SWEP.Instructions 					= [[ Shoot to activate! This will cloak you for 15 seconds! Make it count! ]]
 
 SWEP.ViewModel						= "models/weapons/c_357.mdl"
 SWEP.ViewModelFlip 					= false
@@ -44,24 +44,18 @@ function SWEP:Initialize()
 	self:SetHoldType( "pistol" )
 end
 
-
-function uncloak()
-	local ply = self.Owner
-	self.Owner:SetMaterial("models/glass")
-	self.Weapon:SetMaterial("models/glass")
-	self.Owner:PrintMessage( HUD_PRINTCENTER, "Cloak Off" )
-
-end
-
 function SWEP:PrimaryAttack()
 	local ply = self.Owner
-	self.Owner:SetColor( Color(255, 255, 255, 3) ) 			
+	self.Owner:SetPlayerColor( Vector(255, 255, 255, 3) ) 			
 	self.Owner:SetMaterial( "sprites/heatwave" )
 	self.Weapon:SetMaterial("sprites/heatwave")
 	self.Owner:PrintMessage( HUD_PRINTCENTER, "Cloak On" )
 	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_cloak" ) ) end
 
-	timer.Create( "Uncloak", 15, 1, uncloak )
+	timer.Simple(15, function()
+	ply:SetMaterial( "models/glass" )
+	ply:PrintMessage( HUD_PRINTCENTER, "You are no longer cloaked!" )
+	end)
 end
 
 
