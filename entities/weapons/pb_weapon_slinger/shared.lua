@@ -15,11 +15,19 @@ SWEP.DrawCrosshair		= true
 SWEP.ViewModel			= "models/weapons/v_pistol.mdl"
 SWEP.WorldModel			= "models/weapons/w_pistol.mdl"
 SWEP.ViewModelFlip = true
-//if CLIENT then
-//SWEP.WepSelectIcon		= surface.GetTextureID( "weapons/spiderman" )
-	
-//killicon.Add( "weapon_spiderman", "killicons/weapon_spiderman", color_white )
-//end
+SWEP.Primary.ClipSize 				= 1
+SWEP.Primary.DefaultClip 			= 1 
+SWEP.Primary.Ammo 					= "none"
+SWEP.Primary.Automatic  			= false 
+SWEP.Primary.Recoil 				= 0
+SWEP.Primary.Damage 				= 0
+
+SWEP.Secondary.ClipSize 			= -1
+SWEP.Secondary.DefaultClip 			= -1
+SWEP.Secondary.Ammo     			= "none"
+SWEP.Secondary.Automatic 			= false
+
+SWEP.ShouldDropOnDie 				= false 
 
 function SWEP:Initialize()
 if CLIENT then
@@ -240,32 +248,7 @@ function SWEP:PrimaryAttack()
 	timer.Simple(0.5, function() self.Weapon:SendWeaponAnim(ACT_VM_IDLE_LOWERED) end)
 	end
 end
+
 function SWEP:SecondaryAttack()
-self.Weapon:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
-self.Owner:EmitSound("web/webfire.wav")
-timer.Simple(0.31, function()
-local trace = self.Owner:GetEyeTrace()
-local effectdata = EffectData()
-local Hand1 = self.Owner:LookupBone("ValveBiped.Bip01_R_Hand")
-local Hand1Pos = self.Owner:GetBonePosition(Hand1)
-effectdata:SetStart( Hand1Pos )
-effectdata:SetOrigin( trace.HitPos )
-effectdata:SetScale( 100 )
-util.Effect( "web_fire", effectdata )
-local trace = self.Owner:GetEyeTrace()
-bullet = {}
-bullet.Num    = 1
-bullet.Src    = self.Owner:GetShootPos()
-bullet.Dir    = self.Owner:GetAimVector()
-bullet.Spread = Vector(0, 0, 0)
-bullet.Tracer = 0
-bullet.Force  = 5000
-bullet.Damage = 50
-self.Owner:FireBullets(bullet)
-end)
-timer.Simple(0.5, function() self:SendWeaponAnim(ACT_VM_IDLE_LOWERED) end)
-if CLIENT then
-self:SetWeaponHoldType("none")
-end
-self:SetNextSecondaryFire(CurTime() + 0.8)
+
 end
