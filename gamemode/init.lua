@@ -1,6 +1,7 @@
 AddCSLuaFile( "cl_init.lua")
 AddCSLuaFile( "shared.lua")
 AddCSLuaFile( "vgui/main_menu.lua" )
+AddCSLuaFile( "vgui/f4_menu.lua" )
 AddCSLuaFile( 'vgui/hud.lua' )
 AddCSLuaFile( 'vgui/scoreboard.lua' )
 
@@ -8,8 +9,10 @@ include( "shared.lua")
 
 // Network
 util.AddNetworkString("f2menu")
+util.AddNetworkString("f4menu")
 util.AddNetworkString("player")
 util.AddNetworkString("spectator")
+util.AddNetworkString("getpowerup")
 -- util.AddNetworkString("checkchosen")
 -- util.AddNetworkString("didntchoose")
 util.AddNetworkString("welcomemsg")
@@ -23,8 +26,6 @@ function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome
 
 		net.Start("f2menu")
 		net.Send(ply)
-		//chat.AddText( Color( 100, 100, 255 ), "Welcome to our Power Battle Server", ply, " ! We hope you enjoy your stay!")
-		//ply:ChatPrint("Welcome to our Power Battle Server!")
 end
 
 function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
@@ -32,15 +33,26 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 	if ply:Team() == 1 then 
 		ply:Give( "weapon_smg1" )
 		ply:GiveAmmo(200, 'SMG1', true)
-		ply:Give( "weapon_spiderman")
+		//ply:Give( "weapon_spiderman")
 	elseif ply:Team() == 2 then
 		ply:StripWeapons()
 	end
 end
 
+// F2 Menu
 function GM:ShowTeam( ply )
 		net.Start("f2menu")
 		net.Send( ply )
+end
+
+// F4 Menu
+function GM:ShowSpare2( ply )
+		if ply:Team() == 3 then
+			ply:ChatPrint("Before you can access the Power Up menu you will have to be on the playing team first!")
+		else
+		net.Start("f4menu")
+		net.Send( ply )
+		end
 end
 
 function playerteam( len, ply )
@@ -77,3 +89,10 @@ net.Receive("spectator", spectatorteam);
 -- end
 
 -- net.Receive("checkchosen", checkifchosen)
+
+
+
+
+
+
+
