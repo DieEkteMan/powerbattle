@@ -8,7 +8,7 @@ Made by DieEkteMan & Rowie
 			2. Make team buttons look better
 			3. Display timer on screen ( Time left of powerup )
 			4. Add more powerups
-			5. Fix the time of the speed powerup
+			+5. Fix the time of the speed powerups 						: FIXED ( Rowie 10-12-16 )
 			6. Fill in the rest of the F2 menu
 			7. Improve grammar
 			8. Improve slinger weapon 									: IMPROVED ( Rowie 10-12-16 )
