@@ -11,16 +11,18 @@ util.AddNetworkString("spectator")
 -- util.AddNetworkString("didntchoose")
 util.AddNetworkString("welcomemsg")
 
-
 function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome to user and open up the team selecting menu
-		ply:SetTeam(3)
-		ply:Spectate(OBS_MODE_ROAMING) // Need to make a fix, this still doesnt set the player into Spectate.....
-
+		ply:SetTeam(2)
+		//GAMEMODE:PlayerSpawnAsSpectator( ply )
 		net.Start("welcomemsg")
 		net.Send(ply)
 
 		net.Start("f2menu")
 		net.Send(ply)
+end
+
+function GM:PlayerSpawn( ply )
+		GAMEMODE:PlayerSpawnAsSpectator( ply )
 end
 
 function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
