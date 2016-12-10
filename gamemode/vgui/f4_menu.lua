@@ -54,33 +54,20 @@ local PANEL = {
 	
 	local button = vgui.Create( "DButton", self ) // Close button
 	button:SetText( "Receive powerup!" )
-	button:SetSize( 125, 125)
-	button:SetPos( 360 - 125, 0)
-	-- function button:Paint( w, h )
-	-- 	if( button:IsDown() ) then
-	-- 		button:SetColor( Color( 150, 255, 150 ) )
-	-- 	elseif( button:IsHovered() ) then 
-	-- 		button:SetColor( Color( 200, 255, 200 ) )
-	-- 	else
-	-- 		button:SetColor( Color( 255, 255, 255 ) )
-	-- 	end
-	-- end
+	button:SetDisabled(false)
+	button:SetSize( 375, 125)
+	button:SetPos( 360 - 125, 100)
+
 	button.DoClick = function()
 		net.Start("getpowerup")
 		net.SendToServer()
+		button:SetDisabled(true)
 		self:SetVisible(false)
+		timer.Simple(30, function() 
+		 	button:SetDisabled(false)
+		 end)
 	end
-
-	local time = 90
-
-	timer.Create( LocalPlayer():EntIndex().. "button", 1, 39, function()
-		time = time - 1
-			if (time == 0 ) then
-				button:SetDisabled(false)
-			else
-				button:SetDisabled(true)
-			end
-	end)
+	
 // END MAIN MENU
 
 

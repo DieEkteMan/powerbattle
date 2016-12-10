@@ -17,13 +17,13 @@ util.AddNetworkString("Uncloak")
 util.AddNetworkString("welcomemsg")
 
 function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome to user and open up the team selecting menu
-		ply:SetTeam(3)
-		ply:Spectate(OBS_MODE_ROAMING)
-
 		net.Start("welcomemsg")
 		net.Send(ply)
 
 		net.Start("f2menu")
+		net.Send(ply)
+
+		net.Start("spectator")
 		net.Send(ply)
 end
 
@@ -39,13 +39,9 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 end
 
 // F2 Menu
-function GM:ShowTeam( ply ) // Might be fix?
-	if(target:IsPlayer() and dmginfo:GetDamage() ) then
-		ply:ChatPrint("You are taking damage and therefor you cannot switch teams")
-	else 
+function GM:ShowTeam( ply ) // Might be fix? // Add damage support
 		net.Start("f2menu")
 		net.Send( ply )
-	end
 end
 
 // F4 Menu
@@ -59,14 +55,14 @@ function GM:ShowSpare2( ply )
 end
 
 function playerteam( len, ply )
+
 	if ply:Team() == 1 then
 		ply:ChatPrint("You are already on this team!")
 	else
-
-
 	ply:SetTeam(1);
 	ply:ChatPrint("You've been put into the playing team!");
 	ply:Spawn();
+
 	end
 end
 
