@@ -1,6 +1,19 @@
 include( "shared.lua" )
 include( "vgui/main_menu.lua")
 
+
+function GM:SpawnMenuEnabled() // Should disable the spawn menu
+	return false;
+end
+
+function GM:SpawnMenuOpen()
+	return true
+end
+
+function GM:ContextMenuOpen()
+	return false
+end
+
 // Derma menu to choose team
 net.Receive("f2menu", function()
 	if( !MainMenu ) then

@@ -37,15 +37,38 @@ local PANEL = {
 
 
 
-	local mainpanel = vgui.Create( "DPanel", self )
+	local mainpanel = vgui.Create( "DPanel", self ) // ToDo: Rename sheets to their proper name instead of using sheet1 name it teammenu
 	mainpanel:SetPos( 3, 35 )
 	mainpanel:SetSize( x - 6, y - 35 - 3 )
 	mainpanel.Paint = function( self, w, h )
 		draw.RoundedBox( 0, 0, 0, w, h, Color( 100, 100, 100, 100 ) )
 	end
 
-	local colsheet = vgui.Create( "DColumnSheet", mainpanel )
+	local colsheet = vgui.Create( "DColumnSheet", mainpanel ) // Column Sheet
 	colsheet:Dock( FILL )
+
+
+	local mainmenu = vgui.Create( "DPanel", colsheet )
+	mainmenu:Dock( FILL )
+	mainmenu.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color( 10, 10, 10, 100 ) )
+	end
+	colsheet:AddSheet( "Main Menu", mainmenu, "icon16/box.png" )
+
+	local mainmenulabel = vgui.Create( "DLabel", mainmenu )
+	mainmenulabel:SetFont( "DermaLarge" )
+	mainmenulabel:SetText( [[Welcome to our PowerBattle Server!
+				This gamemode is all about moving around and killing the opponent.
+				There will be added a better description later
+
+
+
+
+				In order for you to get started head over to the team menu!       ]]	)
+	mainmenulabel:SetPos( 0, 0)
+	mainmenulabel:SizeToContents()
+	mainmenulabel:SetContentAlignment(5)
+
 
 	local sheet1 = vgui.Create( "DPanel", colsheet )
 	sheet1:Dock( FILL )
@@ -75,6 +98,13 @@ local PANEL = {
 		self:SetVisible(false)
 	end
 
+
+
+
+
+
+
+
 	local sheet2 = vgui.Create( "DPanel", colsheet )
 	sheet2:Dock( FILL )
 	sheet2.Paint = function( self, w, h )
@@ -82,9 +112,55 @@ local PANEL = {
 	end
 	colsheet:AddSheet( "Credits", sheet2, "icon16/heart.png" )
 
+	// Add Credits here
 
 
 
+	local sheet3 = vgui.Create( "DPanel", colsheet )
+	sheet3:Dock( FILL )
+	sheet3.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color( 10, 10, 10, 100 ) )
+	end
+	colsheet:AddSheet( "Change Log", sheet3, "icon16/wrench.png" )
+
+
+
+	// Add changelog here
+
+
+
+	local sheet4 = vgui.Create( "DPanel", colsheet )
+	sheet4:Dock( FILL )
+	sheet4.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color( 10, 10, 10, 100 ) )
+	end
+	colsheet:AddSheet( "Donate", sheet4, "icon16/money.png" )
+
+
+	// Add donation shizzle here
+
+
+	local sheet5 = vgui.Create( "DPanel", colsheet )
+	sheet5:Dock( FILL )
+	sheet5.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color( 10, 10, 10, 100 ) )
+	end
+	colsheet:AddSheet( "F.A.Q", sheet5, "icon16/comment.png" )
+
+	// FAQ Shizzle here
+
+
+
+
+
+	local staffsheet = vgui.Create( "DPanel", colsheet )
+	staffsheet:Dock( FILL )
+	staffsheet.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color( 10, 10, 10, 100 ) )
+	end
+	colsheet:AddSheet( "Staff", staffsheet, "icon16/shield.png" )
+
+	// Add staff here
 
 
 

@@ -11,17 +11,16 @@ util.AddNetworkString("spectator")
 -- util.AddNetworkString("didntchoose")
 util.AddNetworkString("welcomemsg")
 
+
 function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome to user and open up the team selecting menu
 		ply:SetTeam(3)
-		ply:Spectate(OBS_MODE_ROAMING)
+		ply:Spectate(OBS_MODE_ROAMING) // Need to make a fix, this still doesnt set the player into Spectate.....
 
 		net.Start("welcomemsg")
 		net.Send(ply)
 
 		net.Start("f2menu")
 		net.Send(ply)
-		//chat.AddText( Color( 100, 100, 255 ), "Welcome to our Power Battle Server", ply, " ! We hope you enjoy your stay!")
-		//ply:ChatPrint("Welcome to our Power Battle Server!")
 end
 
 function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
@@ -31,6 +30,12 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 		ply:Give( "weapon_spiderman")
 	elseif ply:Team() == 2 then
 		ply:StripWeapons()
+	end
+end
+
+function GM:PlayerSpawnProp( ply, model )
+	if ( !ply:IsAdmin() ) then
+		return false
 	end
 end
 
@@ -63,8 +68,7 @@ function spectatorteam( len, ply )
 end
 
 net.Receive("spectator", spectatorteam);
-
--- function checkifchosen( len, ply )
+-- function checkifchosen( len, ply ) // Hmmm
 -- 	if ply:Team() == 3 then
 -- 		net.Start("didntchoose")
 -- 		net.Send(ply)
@@ -73,3 +77,29 @@ net.Receive("spectator", spectatorteam);
 -- end
 
 -- net.Receive("checkchosen", checkifchosen)
+
+
+
+
+local hooks = {
+    "Effect",
+    "NPC",
+    "Prop",
+    "Ragdoll",
+    "SENT",
+    "Vehicle"
+}
+
+
+for _, v in pairs (hooks) do
+
+
+    hook.Add("PlayerSpawn"..v, "Disallow_user_"..v, function(client)
+        if (client:IsUserGroup("admin") or client:IsUserGroup("superadmin")) then
+            return true
+        end
+        
+        return false
+    end)
+    
+end
