@@ -90,6 +90,11 @@ net.Receive("spectator", spectatorteam);
 
 -- net.Receive("checkchosen", checkifchosen)
 
+function getpowerup( len, ply )
+	ply:Give("pb_powerup_cloak")
+	ply:ChatPrint( "Test")
+end
+net.Receive( "getpowerup", getpowerup)
 
 
 

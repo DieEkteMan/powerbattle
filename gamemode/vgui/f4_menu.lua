@@ -54,8 +54,8 @@ local PANEL = {
 	
 	local button = vgui.Create( "DButton", self ) // Close button
 	button:SetText( "Receive powerup!" )
-	button:SetSize( 50, 30)
-	button:SetPos( x - 50, 0)
+	button:SetSize( 125, 125)
+	button:SetPos( 360 - 125, 0)
 	-- function button:Paint( w, h )
 	-- 	if( button:IsDown() ) then
 	-- 		button:SetColor( Color( 150, 255, 150 ) )
