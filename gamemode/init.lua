@@ -16,18 +16,6 @@ util.AddNetworkString("getpowerup")
 util.AddNetworkString("Uncloak")
 util.AddNetworkString("welcomemsg")
 
-
-function GM:EntityTakeDamage( target, dmginfo ) // Checking if the user is getting damage later on add a function so they can't switch to spectator
-
-	if ( target:IsPlayer() and dmginfo:GetDamage() ) then
-
-		target:ChatPrint("You are taking damage")
-
-	end
-
-end
-
-
 function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome to user and open up the team selecting menu
 		ply:SetTeam(3)
 		ply:Spectate(OBS_MODE_ROAMING)
@@ -50,7 +38,7 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 end
 
 // F2 Menu
-function GM:ShowTeam( ply ) // Check
+function GM:ShowTeam( ply, target, dmginfo ) // Might be fix?
 	if(target:IsPlayer() and dmginfo:GetDamage() ) then
 		ply:ChatPrint("You are taking damage and therefor you cannot switch teams")
 	else 
