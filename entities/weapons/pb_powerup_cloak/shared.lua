@@ -45,12 +45,12 @@ function SWEP:Initialize()
 end
 
 
-local function uncloak( ply )
-	
-	ply:SetMaterial("models/glass")
-	ply:SetMaterial("models/glass")
-	ply:PrintMessage( HUD_PRINTCENTER, "Cloak Off" )
-	
+local function uncloak()
+	local ply = self.Owner
+	self.Owner:SetMaterial("models/glass")
+	self.Weapon:SetMaterial("models/glass")
+	self.Owner:PrintMessage( HUD_PRINTCENTER, "Cloak Off" )
+
 end
 
 function SWEP:PrimaryAttack()
