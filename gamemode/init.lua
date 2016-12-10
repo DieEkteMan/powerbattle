@@ -13,7 +13,6 @@ util.AddNetworkString("f4menu")
 util.AddNetworkString("player")
 util.AddNetworkString("spectator")
 util.AddNetworkString("getpowerup")
-util.AddNetworkString("Uncloak")
 util.AddNetworkString("welcomemsg")
 
 function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome to user and open up the team selecting menu
@@ -97,15 +96,6 @@ function getpowerup( len, ply ) // Add a timer on this function so that the play
 	end
 end
 net.Receive( "getpowerup", getpowerup)
-
-net.Receive( "Uncloak", uncloak)
-
-
-function GM:ScaleNPCDamage(npc,hitgroup,dmginfo) // Possible falldamage fix?
-   if dmginfo:IsFallDamage() then
-      dmginfo:ScaleDamage(0)
-   end
-end
 
 local hooks = {
     "Effect",
