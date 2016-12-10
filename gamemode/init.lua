@@ -14,8 +14,6 @@ util.AddNetworkString("player")
 util.AddNetworkString("spectator")
 util.AddNetworkString("getpowerup")
 util.AddNetworkString("Uncloak")
--- util.AddNetworkString("checkchosen")
--- util.AddNetworkString("didntchoose")
 util.AddNetworkString("welcomemsg")
 
 function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome to user and open up the team selecting menu
@@ -34,8 +32,6 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 	if ply:Team() == 1 then 
 		ply:Give( "weapon_smg1" )
 		ply:GiveAmmo(200, 'SMG1', true)
-		//ply:SetModel( "models/player/kleiner.mdl" )
-		//ply:Give( "weapon_spiderman")
 	elseif ply:Team() == 2 then
 		ply:StripWeapons()
 	end
@@ -82,16 +78,6 @@ end
 
 net.Receive("spectator", spectatorteam);
 
--- function checkifchosen( len, ply )
--- 	if ply:Team() == 3 then
--- 		net.Start("didntchoose")
--- 		net.Send(ply)
--- 	else
--- 		return false;
--- end
-
--- net.Receive("checkchosen", checkifchosen)
-
 function getpowerup( len, ply ) // Add a timer on this function so that the player has to wait I.e. 30 sec before pressing again
 	if math.random( 1, 3 ) == 1 then
 		ply:Give( "pb_powerup_cloak" )
@@ -106,6 +92,12 @@ net.Receive( "getpowerup", getpowerup)
 net.Receive( "Uncloak", uncloak)
 
 
+function GM:ScaleNPCDamage(npc,hitgroup,dmginfo) // Possible falldamage fix?
+   if dmginfo:IsFallDamage() then
+      dmginfo:ScaleDamage(0)
+   end
+end
+
 local hooks = {
     "Effect",
     "NPC",
@@ -115,8 +107,7 @@ local hooks = {
     "Vehicle"
 }
 
-
-for _, v in pairs (hooks) do
+for _, v in pairs (hooks) do // Disable spawning
 
 
     hook.Add("PlayerSpawn"..v, "Disallow_user_"..v, function(client)
