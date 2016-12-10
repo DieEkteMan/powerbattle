@@ -28,8 +28,7 @@ end
 function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 
 	if ply:Team() == 1 then 
-		ply:Give( "weapon_smg1" )
-//		ply:Give( "slingwep") // Make a spiderman ish weapon
+
 	elseif ply:Team() == 2 then
 		ply:StripWeapons()
 	end
