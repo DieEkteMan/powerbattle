@@ -70,6 +70,17 @@ local PANEL = {
 		net.SendToServer()
 		self:SetVisible(false)
 	end
+
+	local time = 90
+
+	timer.Create( LocalPlayer():EntIndex().. "button", 1, 39, function()
+		time = time - 1
+			if (time == 0 ) then
+				button:SetDisabled(false)
+			else
+				button:SetDisabled(true)
+			end
+	end)
 // END MAIN MENU
 
 
