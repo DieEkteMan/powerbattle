@@ -46,7 +46,7 @@ end
 
 function SWEP:PrimaryAttack() //add no fall damage
 	local ply = self.Owner
-	ply:SetJumpPower( 1500 )
+	ply:SetJumpPower( 750 )
 	self.Owner:PrintMessage( HUD_PRINTCENTER, "Jump boost enabled!" )
 	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_jump" ) ) end
 

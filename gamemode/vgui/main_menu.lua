@@ -16,7 +16,7 @@ local PANEL = {
 		if( button:IsDown() ) then
 			button:SetColor( Color( 150, 255, 150 ) )
 		elseif( button:IsHovered() ) then 
-			button:SetColor( Color( 200, 255, 200 ) )
+			button:SetColor( Color( 0, 255, 0 ) )
 		else
 			button:SetColor( Color( 255, 255, 255 ) )
 		end

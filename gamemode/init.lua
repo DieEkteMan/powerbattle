@@ -13,17 +13,16 @@ util.AddNetworkString("f4menu")
 util.AddNetworkString("player")
 util.AddNetworkString("spectator")
 util.AddNetworkString("getpowerup")
-util.AddNetworkString("Uncloak")
 util.AddNetworkString("welcomemsg")
 
 function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome to user and open up the team selecting menu
-		ply:SetTeam(3)
-		ply:Spectate(OBS_MODE_ROAMING)
-
 		net.Start("welcomemsg")
 		net.Send(ply)
 
 		net.Start("f2menu")
+		net.Send(ply)
+
+		net.Start("spectator")
 		net.Send(ply)
 end
 
@@ -31,6 +30,7 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 
 	if ply:Team() == 1 then 
 		ply:Give( "weapon_smg1" )
+		ply:Give( "pb_weapon_slinger" )
 		ply:GiveAmmo(200, 'SMG1', true)
 	elseif ply:Team() == 2 then
 		ply:StripWeapons()
@@ -38,13 +38,9 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 end
 
 // F2 Menu
-function GM:ShowTeam( ply, target, dmginfo ) // Might be fix?
-	if(target:IsPlayer() and dmginfo:GetDamage() ) then
-		ply:ChatPrint("You are taking damage and therefor you cannot switch teams")
-	else 
+function GM:ShowTeam( ply ) // Might be fix? // Add damage support
 		net.Start("f2menu")
 		net.Send( ply )
-	end
 end
 
 // F4 Menu
@@ -58,14 +54,14 @@ function GM:ShowSpare2( ply )
 end
 
 function playerteam( len, ply )
+
 	if ply:Team() == 1 then
 		ply:ChatPrint("You are already on this team!")
 	else
-
-
 	ply:SetTeam(1);
 	ply:ChatPrint("You've been put into the playing team!");
 	ply:Spawn();
+
 	end
 end
 
@@ -85,23 +81,29 @@ end
 net.Receive("spectator", spectatorteam);
 
 function getpowerup( len, ply ) // Add a timer on this function so that the player has to wait I.e. 30 sec before pressing again
+<<<<<<< HEAD
 	if math.random(1, 3) == 1 then 
 		ply:Give( "pb_powerup_cloak")
 	elseif math.random(1, 3) == 2 then 
 		ply:Give( "pb_powerup_speed" )
 	elseif math.random(1, 3) == 3 then
+=======
+	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) then
+		ply:ChatPrint("You still have a powerup left! Use it first before getting a new one!")
+	else
+
+	local number = math.random(1, 3)
+		if number == 1 then
+			ply:Give( "pb_powerup_cloak" )
+		elseif number == 2 then
+			ply:Give( "pb_powerup_speed" )
+		elseif number == 3 then
+			ply:Give( "pb_powerup_jump" )
+		end
+>>>>>>> refs/remotes/r0wi3/master
 	end
 end
 net.Receive( "getpowerup", getpowerup)
-
-net.Receive( "Uncloak", uncloak)
-
-
-function GM:ScaleNPCDamage(npc,hitgroup,dmginfo) // Possible falldamage fix?
-   if dmginfo:IsFallDamage() then
-      dmginfo:ScaleDamage(0)
-   end
-end
 
 local hooks = {
     "Effect",
