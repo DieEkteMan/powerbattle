@@ -92,8 +92,12 @@ net.Receive("spectator", spectatorteam);
 
 -- net.Receive("checkchosen", checkifchosen)
 
-function getpowerup( len, ply )
-	ply:Give("pb_powerup_cloak")
+function getpowerup( len, ply ) // Add a timer on this function so that the player has to wait I.e. 30 sec before pressing again
+	if math.random(1, 2) == 1 then 
+		ply:Give( "pb_powerup_cloak")
+	else
+		ply:Give( "pb_powerup_speed" )
+	end
 	//ply:ChatPrint( "Test")
 end
 net.Receive( "getpowerup", getpowerup)
