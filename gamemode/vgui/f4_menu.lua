@@ -16,7 +16,7 @@ local PANEL = {
 		if( button:IsDown() ) then
 			button:SetColor( Color( 150, 255, 150 ) )
 		elseif( button:IsHovered() ) then 
-			button:SetColor( Color( 200, 255, 200 ) )
+			button:SetColor( Color( 0, 255, 0 ) )
 		else
 			button:SetColor( Color( 255, 255, 255 ) )
 		end
@@ -52,11 +52,25 @@ local PANEL = {
 	end
 	colsheet:AddSheet( "Power Ups", mainmenu, "icon16/box.png" )
 	
-	local button = vgui.Create( "DButton", self ) // Close button
+	local button = vgui.Create( "DButton", self ) // Powerup button
+	button:SetFont("DermaLarge")
 	button:SetText( "Receive powerup!" )
 	button:SetDisabled(false)
 	button:SetSize( 375, 125)
 	button:SetPos( 360 - 125, 100)
+
+	function button:Paint( w, h )
+		if( button:IsDown() ) then
+			button:SetColor( Color( 150, 255, 150 ) )
+		elseif( button:IsHovered() ) then 
+			button:SetColor( Color( 0, 255, 0 ) )
+		else
+			button:SetColor( Color( 255, 255, 255 ) )
+		end
+
+		draw.RoundedBox(4 ,0, 0, 375, 125, Color( 100, 100, 100, 100 ) )
+		draw.RoundedBox(4 ,0, 0 , 375, 125, Color( 10, 10, 10, 100 ) )
+	end
 
 	button.DoClick = function()
 		net.Start("getpowerup")
