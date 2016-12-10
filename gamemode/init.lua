@@ -28,6 +28,10 @@ function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome
 		net.Send(ply)
 end
 
+function GM:PlayerSpawn( ply )
+		ply:SetMaterial( "sprites/heatwave" )
+end
+
 function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 
 	if ply:Team() == 1 then 

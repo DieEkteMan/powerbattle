@@ -45,7 +45,7 @@ function SWEP:Initialize()
 end
 
 
-local function uncloak()
+function uncloak()
 	local ply = self.Owner
 	self.Owner:SetMaterial("models/glass")
 	self.Weapon:SetMaterial("models/glass")
