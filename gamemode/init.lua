@@ -16,6 +16,18 @@ util.AddNetworkString("getpowerup")
 util.AddNetworkString("Uncloak")
 util.AddNetworkString("welcomemsg")
 
+
+function GM:EntityTakeDamage( target, dmginfo ) // Checking if the user is getting damage later on add a function so they can't switch to spectator
+
+	if ( target:IsPlayer() and dmginfo:GetDamage() ) then
+
+		target:ChatPrint("You are taking damage")
+
+	end
+
+end
+
+
 function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome to user and open up the team selecting menu
 		ply:SetTeam(3)
 		ply:Spectate(OBS_MODE_ROAMING)
@@ -57,6 +69,8 @@ function playerteam( len, ply )
 	if ply:Team() == 1 then
 		ply:ChatPrint("You are already on this team!")
 	else
+
+
 	ply:SetTeam(1);
 	ply:ChatPrint("You've been put into the playing team!");
 	ply:Spawn();
