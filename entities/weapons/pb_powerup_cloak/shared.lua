@@ -44,6 +44,15 @@ function SWEP:Initialize()
 	self:SetHoldType( "pistol" )
 end
 
+
+local function uncloak( ply )
+	
+	ply:SetMaterial("models/glass")
+	ply:SetMaterial("models/glass")
+	ply:PrintMessage( HUD_PRINTCENTER, "Cloak Off" )
+	
+end
+
 function SWEP:PrimaryAttack()
 	local ply = self.Owner
 	self.Owner:SetColor( Color(255, 255, 255, 3) ) 			
@@ -52,13 +61,10 @@ function SWEP:PrimaryAttack()
 	self.Owner:PrintMessage( HUD_PRINTCENTER, "Cloak On" )
 	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_cloak" ) ) end
 
-	timer.Simple(15, function()
-	local ply = self.Owner
-	self.Owner:SetMaterial("models/glass")
-	self.Weapon:SetMaterial("models/glass")
-	self.Owner:PrintMessage( HUD_PRINTCENTER, "Cloak Off" )
-	end)
+	timer.Create( "Uncloak", 15, 1, uncloak )
 end
+
+
 
 function SWEP:SecondaryAttack()
 

@@ -47,7 +47,7 @@ end
 
 // F4 Menu
 function GM:ShowSpare2( ply )
-		if ply:Team() == 3 then
+		if ply:Team() == 3 or ply:Team() == 2 then
 			ply:ChatPrint("Before you can access the Power Up menu you will have to be on the playing team first!")
 		else
 		net.Start("f4menu")
@@ -98,6 +98,27 @@ net.Receive( "getpowerup", getpowerup)
 
 
 
+local hooks = {
+    "Effect",
+    "NPC",
+    "Prop",
+    "Ragdoll",
+    "SENT",
+    "Vehicle"
+}
 
+
+for _, v in pairs (hooks) do
+
+
+    hook.Add("PlayerSpawn"..v, "Disallow_user_"..v, function(client)
+        if (client:IsUserGroup("admin") or client:IsUserGroup("superadmin")) then
+            return true
+        end
+        
+        return false
+    end)
+    
+end
 
 
