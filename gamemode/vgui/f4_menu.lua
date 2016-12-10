@@ -68,6 +68,7 @@ local PANEL = {
 	button.DoClick = function()
 		net.Start("getpowerup")
 		net.SendToServer()
+		self:SetVisible(false)
 	end
 // END MAIN MENU
 

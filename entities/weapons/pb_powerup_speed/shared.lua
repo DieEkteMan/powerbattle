@@ -3,8 +3,8 @@ AddCSLuaFile()
 
 SWEP.Author 						=	"Rowie"
 SWEP.Base 							= "weapon_base"
-SWEP.PrintName 						= "Cloak"
-SWEP.Instructions 					= [[ Shoot to activate! This will cloak you for 15 seconds! Make it count! ]]
+SWEP.PrintName 						= "Speed!"
+SWEP.Instructions 					= [[ Shoot to activate! This will give you a speed boost for 45 seconds! Make it count! ]]
 
 SWEP.ViewModel						= "models/weapons/c_357.mdl"
 SWEP.ViewModelFlip 					= false
@@ -46,15 +46,15 @@ end
 
 function SWEP:PrimaryAttack()
 	local ply = self.Owner
-	self.Owner:SetPlayerColor( Vector(255, 255, 255, 3) ) 			
-	self.Owner:SetMaterial( "sprites/heatwave" )
-	self.Weapon:SetMaterial("sprites/heatwave")
-	self.Owner:PrintMessage( HUD_PRINTCENTER, "Cloak On" )
-	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_cloak" ) ) end
+	ply:SetWalkSpeed( 500 )
+	ply:SetRunSpeed( 1050 )
+	self.Owner:PrintMessage( HUD_PRINTCENTER, "Speed boost enabled!" )
+	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_speed" ) ) end
 
 	timer.Simple(15, function()
-	ply:SetMaterial( "models/glass" )
-	ply:PrintMessage( HUD_PRINTCENTER, "You are no longer cloaked!" )
+	ply:SetWalkSpeed( 250 )
+	ply:SetRunSpeed( 500 )
+	ply:PrintMessage( HUD_PRINTCENTER, "Speed boost ended" )
 	end)
 end
 

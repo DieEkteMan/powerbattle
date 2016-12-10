@@ -13,6 +13,7 @@ util.AddNetworkString("f4menu")
 util.AddNetworkString("player")
 util.AddNetworkString("spectator")
 util.AddNetworkString("getpowerup")
+util.AddNetworkString("Uncloak")
 -- util.AddNetworkString("checkchosen")
 -- util.AddNetworkString("didntchoose")
 util.AddNetworkString("welcomemsg")
@@ -28,16 +29,12 @@ function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome
 		net.Send(ply)
 end
 
-function GM:PlayerSpawn( ply )
-		ply:SetMaterial( "sprites/heatwave" )
-end
-
 function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 
 	if ply:Team() == 1 then 
 		ply:Give( "weapon_smg1" )
 		ply:GiveAmmo(200, 'SMG1', true)
-		ply:SetModel( "models/player/kleiner.mdl" )
+		//ply:SetModel( "models/player/kleiner.mdl" )
 		//ply:Give( "weapon_spiderman")
 	elseif ply:Team() == 2 then
 		ply:StripWeapons()
@@ -95,12 +92,17 @@ net.Receive("spectator", spectatorteam);
 
 -- net.Receive("checkchosen", checkifchosen)
 
-function getpowerup( len, ply )
-	ply:Give("pb_powerup_cloak")
-	ply:ChatPrint( "Test")
+function getpowerup( len, ply ) // Add a timer on this function so that the player has to wait I.e. 30 sec before pressing again
+	if math.random(1, 2) == 1 then 
+		ply:Give( "pb_powerup_cloak")
+	else
+		ply:Give( "pb_powerup_speed" )
+	end
+	//ply:ChatPrint( "Test")
 end
 net.Receive( "getpowerup", getpowerup)
 
+net.Receive( "Uncloak", uncloak)
 
 
 local hooks = {
