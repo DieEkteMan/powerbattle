@@ -50,9 +50,13 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 end
 
 // F2 Menu
-function GM:ShowTeam( ply )
+function GM:ShowTeam( ply ) // Check
+	if(target:IsPlayer() and dmginfo:GetDamage() ) then
+		ply:ChatPrint("You are taking damage and therefor you cannot switch teams")
+	else 
 		net.Start("f2menu")
 		net.Send( ply )
+	end
 end
 
 // F4 Menu
