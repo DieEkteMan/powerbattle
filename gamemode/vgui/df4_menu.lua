@@ -75,7 +75,7 @@ local PANEL = {
 		button:SetDisabled(true)
 		self:SetVisible( false )
 		button:SetColor( Color( 255, 0, 0 ) )
-		timer.Simple(30, function() 
+		timer.Simple(45, function() 
 		 	button:SetDisabled(false)
 		 	button:SetColor( Color( 0, 255, 0 ) )
 		 end)
@@ -102,7 +102,7 @@ local PANEL = {
 		button:SetDisabled(true)
 		self:SetVisible( false )
 		button:SetColor( Color( 255, 0, 0 ) )
-		timer.Simple(30, function() 
+		timer.Simple(45, function() 
 		 	button:SetDisabled(false)
 		 	button:SetColor( Color( 0, 255, 0 ) )
 		 end)
@@ -129,7 +129,7 @@ local PANEL = {
 		button:SetDisabled(true)
 		self:SetVisible( false )
 		button:SetColor( Color( 255, 0, 0 ) )
-		timer.Simple(30, function() 
+		timer.Simple(45, function() 
 		 	button:SetDisabled(false)
 		 	button:SetColor( Color( 0, 255, 0 ) )
 		 end)
@@ -156,7 +156,7 @@ local button = vgui.Create( "DButton", self ) // Prophunt
 		button:SetDisabled(true)
 		self:SetVisible( false )
 		button:SetColor( Color( 255, 0, 0 ) )
-		timer.Simple(30, function() 
+		timer.Simple(45, function() 
 		 	button:SetDisabled(false)
 		 	button:SetColor( Color( 0, 255, 0 ) )
 		 end)
@@ -183,20 +183,20 @@ local button = vgui.Create( "DButton", self ) // Shrink
 		button:SetDisabled(true)
 		self:SetVisible( false )
 		button:SetColor( Color( 255, 0, 0 ) )
-		timer.Simple(30, function() 
+		timer.Simple(45, function() 
 		 	button:SetDisabled(false)
 		 	button:SetColor( Color( 0, 255, 0 ) )
 		 end)
 	end
 	
-///////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////// SECOND 
 
 	local button = vgui.Create( "DButton", self ) //Bomb
 	button:SetFont("DermaDefault")
 	button:SetText( "Bomb!" )
 	button:SetDisabled(false)
 	button:SetSize( 50, 50)
-	button:SetPos( 135, 200)
+	button:SetPos( 135, 175)
 	button:SetColor( Color( 0, 255, 0 ) )
 
 	function button:Paint( w, h )
@@ -210,13 +210,38 @@ local button = vgui.Create( "DButton", self ) // Shrink
 		button:SetDisabled(true)
 		self:SetVisible( false )
 		button:SetColor( Color( 255, 0, 0 ) )
-		timer.Simple(30, function() 
+		timer.Simple(45, function() 
 		 	button:SetDisabled(false)
 		 	button:SetColor( Color( 0, 255, 0 ) )
 		 end)
 	end
 
 //////////////////////////////////////////////////////////////////////////////////
+
+	local button = vgui.Create( "DButton", self ) // Shield
+	button:SetFont("DermaDefault")
+	button:SetText( "Shield!" )
+	button:SetDisabled(false)
+	button:SetSize( 65, 50)
+	button:SetPos( 135 + 82.5, 100)
+	button:SetColor( Color( 0, 255, 0 ) )
+
+	function button:Paint( w, h )
+		draw.RoundedBox(4 ,0, 0, 65, 125, Color( 100, 100, 100, 100 ) )
+		draw.RoundedBox(4 ,0, 0 , 65, 125, Color( 10, 10, 10, 100 ) )
+	end
+
+	button.DoClick = function()
+		net.Start("getshield")
+		net.SendToServer()
+		button:SetDisabled(true)
+		self:SetVisible( false )
+		button:SetColor( Color( 255, 0, 0 ) )
+		timer.Simple(45, function() 
+		 	button:SetDisabled(false)
+		 	button:SetColor( Color( 0, 255, 0 ) )
+		 end)
+	end
 
 
 
@@ -244,7 +269,7 @@ local button = vgui.Create( "DButton", self ) // Shrink
 	-- 	button:SetDisabled(true)
 	-- 	self:SetVisible( false )
 	-- 	button:SetColor( Color( 255, 0, 0 ) )
-	-- 	timer.Simple(30, function() 
+	-- 	timer.Simple(45, function() 
 	-- 	 	button:SetDisabled(false)
 	-- 	 	button:SetColor( Color( 0, 255, 0 ) )
 	-- 	 end)

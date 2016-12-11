@@ -4,7 +4,7 @@ AddCSLuaFile()
 SWEP.Author                         =   "Rowie"
 SWEP.Base                           = "weapon_base"
 SWEP.PrintName                      = "Shield"
-SWEP.Instructions                   = [[ Shoot to activate! This will shield you for 45 seconds! Make it count! ]]
+SWEP.Instructions                   = [[ Shoot to activate! This will shield you for 30 seconds! Make it count! ]]
 
 SWEP.ViewModel                      = "models/weapons/c_357.mdl"
 SWEP.ViewModelFlip                  = false
@@ -22,8 +22,8 @@ SWEP.SlotPos                        = 0
 SWEP.DrawAmmo                       = false
 SWEP.DrawCrosshair                  = false
 
-SWEP.Spawnable                      = true
-SWEP.AdminSpawnable                 = true
+SWEP.Spawnable                      = false
+SWEP.AdminSpawnable                 = false
 
 SWEP.Primary.ClipSize               = 1
 SWEP.Primary.DefaultClip            = 1 
