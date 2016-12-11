@@ -1,7 +1,7 @@
 local PANEL = {
 	Init = function( self )
 
-	self:SetSize( 720, 500)
+	self:SetSize( 620, 500)
 	self:Center()
 	self:SetVisible(true)
 	self:MakePopup()
@@ -169,7 +169,7 @@ local button = vgui.Create( "DButton", self ) // Shrink
 	button:SetText( "Shrink!" )
 	button:SetDisabled(false)
 	button:SetSize( 70, 50)
-	button:SetPos( 300 + 82.5 + 41.25 + 41.25, 100)
+	button:SetPos( 300 + 82.5 + 82.5 + 61.875, 100)
 	button:SetColor( Color( 0, 255, 0 ) )
 
 	function button:Paint( w, h )
@@ -191,7 +191,7 @@ local button = vgui.Create( "DButton", self ) // Shrink
 	
 ///////////////////////////////////////////////////////////////////////////////////
 
-	local button = vgui.Create( "DButton", self ) Bomb
+	local button = vgui.Create( "DButton", self ) //Bomb
 	button:SetFont("DermaDefault")
 	button:SetText( "Bomb!" )
 	button:SetDisabled(false)
