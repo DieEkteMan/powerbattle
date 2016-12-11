@@ -251,7 +251,7 @@ for _, v in pairs (hooks) do // Disable spawning
 
 
     hook.Add("PlayerSpawn"..v, "Disallow_user_"..v, function(client)
-        if (client:IsUserGroup("admin") or client:IsUserGroup("superadmin")) then
+        if (client:IsUserGroup("Founder") or client:IsUserGroup("SuperAdmin")) then
             return true
         end
         
