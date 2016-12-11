@@ -10,7 +10,7 @@ function GM:ScoreboardShow(ply)
 		ScoreboardDerma:SetDraggable(false)
 		ScoreboardDerma:ShowCloseButton(false)
 		ScoreboardDerma.Paint = function()
-			draw.RoundedBox(5, 0, 0, ScoreboardDerma:GetWide(), ScoreboardDerma:GetTall(), Color(60, 60, 60, 200))
+			draw.RoundedBox(6, 0, 0, ScoreboardDerma:GetWide(), ScoreboardDerma:GetTall(), Color(60, 60, 60, 200))
 		end
 		
 		local PlayerScrollPanel = vgui.Create('DScrollPanel', ScoreboardDerma)
