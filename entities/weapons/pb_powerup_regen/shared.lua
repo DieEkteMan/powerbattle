@@ -22,8 +22,8 @@ SWEP.SlotPos 						= 0
 SWEP.DrawAmmo 						= false
 SWEP.DrawCrosshair 					= false
 
-SWEP.Spawnable 						= true
-SWEP.AdminSpawnable 				= true
+SWEP.Spawnable 						= false
+SWEP.AdminSpawnable 				= false
 
 SWEP.Primary.ClipSize 				= 1
 SWEP.Primary.DefaultClip 			= 1 

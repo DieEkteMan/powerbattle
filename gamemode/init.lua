@@ -206,7 +206,7 @@ function regen( len, ply )
 		ply:Give( "pb_powerup_regen" )
 	end
 end
-net.Receive( "getregen", regem )
+net.Receive( "getregen", regen )
 
 
 
