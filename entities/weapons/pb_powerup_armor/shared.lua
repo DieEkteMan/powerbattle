@@ -44,13 +44,10 @@ function SWEP:Initialize()
 	self:SetHoldType( "pistol" )
 end
 
-function SWEP:PrimaryAttack()		
+function SWEP:PrimaryAttack()	
+	local ply = self.Owner
+	if ( SERVER ) then self.Owner:SetArmor(100) end
 	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_armor" ) ) end
-	timer.Simple(1, function() 
-		self.Owner:SetArmor(100)
-	end)
-
-
 end
 
 
