@@ -35,8 +35,8 @@ function GM:ScoreboardShow(ply)
 
 				draw.SimpleText(v:GetName(),'Font1',20,15, Color(255,255,255))
 				draw.SimpleText("Rank: "..v:GetUserGroup(), "Font2", 200, 15, Color( 255, 255, 255 ), TEXT_ALIGN_CENTER)
-				draw.SimpleText("Kills: "..v:Frags(), "Font3", PlayerList:GetWide() - 120, 15, Color( 255, 255, 255 ), TEXT_ALIGN_RIGHT)
-				draw.SimpleText("Deaths: "..v:Deaths(), "Font3", PlayerList:GetWide() - 120, 30, Color( 255, 255, 255 ), TEXT_ALIGN_RIGHT)
+				draw.SimpleText("Kills: "..v:Frags(), "Font3", PlayerList:GetWide() - 120, 10, Color( 255, 255, 255 ), TEXT_ALIGN_RIGHT)
+				draw.SimpleText("Deaths: "..v:Deaths(), "Font3", PlayerList:GetWide() - 120, 25, Color( 255, 255, 255 ), TEXT_ALIGN_RIGHT)
 				draw.SimpleText("Ping "..v:Ping(), "Font3", PlayerList:GetWide() - 15, 15, Color( 255, 255, 255 ), TEXT_ALIGN_RIGHT)
 				if v:GetUserGroup() == "superadmin" then
 					surface.SetMaterial( Material("icon16/shield.png") )
