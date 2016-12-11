@@ -48,7 +48,6 @@ function SWEP:PrimaryAttack()
 	local ply = self.Owner
 	self.Owner:SetPlayerColor( Vector(255, 255, 255, 3) ) 			
 	self.Owner:SetMaterial( "sprites/heatwave" )
-	self.Weapon:SetMaterial("sprites/heatwave")
 	self.Owner:PrintMessage( HUD_PRINTCENTER, "Cloak On" )
 	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_cloak" ) ) end
 

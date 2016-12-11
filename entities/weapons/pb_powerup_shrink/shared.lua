@@ -3,8 +3,8 @@ AddCSLuaFile()
 
 SWEP.Author 						=	"Rowie"
 SWEP.Base 							= "weapon_base"
-SWEP.PrintName 						= "Prophunt!"
-SWEP.Instructions 					= [[ Shoot to activate! This will turn you into a prop for 30 seconds! Make it count! ]]
+SWEP.PrintName 						= "Shrink yourself!"
+SWEP.Instructions 					= [[ Shoot to activate! This will shrink you for 30 seconds! Make it count! ]]
 
 SWEP.ViewModel						= "models/weapons/c_357.mdl"
 SWEP.ViewModelFlip 					= false
@@ -46,14 +46,18 @@ end
 
 function SWEP:PrimaryAttack()
 	local ply = self.Owner
-	self.Owner:SetPlayerColor( Vector(255, 255, 255, 3) ) 	
-	self.Owner:SetModel( "models/props_junk/plasticbucket001a.mdl" )		
-	
-	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_prop" ) ) end
+	self.Owner:SetRunSpeed( self.Owner:GetRunSpeed() * 1.5 )
+    self.Owner:SetWalkSpeed( self.Owner:GetWalkSpeed() * 1.5 )
+    self.Owner:SetModelScale( self.Owner:GetModelScale() / 2.5, 1 )
+    self.Owner:SetHealth( self.Owner:Health() / 2.5 )
+	self.Owner:PrintMessage( HUD_PRINTCENTER, "Shrunken!" )
+	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_shrink" ) ) end
 
-	timer.Simple(15, function()
-	ply:SetModel( "models/player/kleiner.mdl" )
-	ply:PrintMessage( HUD_PRINTCENTER, "You are no longer a prop!" )
+	timer.Simple(30, function()
+	ply:SetRunSpeed( 500 )
+    ply:SetWalkSpeed( 250 )
+   	ply:SetModelScale( 1, 1 )
+	ply:PrintMessage( HUD_PRINTCENTER, "You now have your normal size back!" )
 	end)
 end
 
