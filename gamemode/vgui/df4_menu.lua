@@ -223,7 +223,7 @@ local button = vgui.Create( "DButton", self ) // Shrink
 	button:SetText( "Shield!" )
 	button:SetDisabled(false)
 	button:SetSize( 65, 50)
-	button:SetPos( 135 + 82.5, 100)
+	button:SetPos( 135 + 82.5, 175)
 	button:SetColor( Color( 0, 255, 0 ) )
 
 	function button:Paint( w, h )
@@ -243,6 +243,32 @@ local button = vgui.Create( "DButton", self ) // Shrink
 		 end)
 	end
 
+////////////////////////////////////////////////////////////////////////////////
+
+	local button = vgui.Create( "DButton", self ) // Speed
+	button:SetFont("DermaDefault")
+	button:SetText( "Health Regen!" )
+	button:SetDisabled(false)
+	button:SetSize( 75, 50)
+	button:SetPos( 217.5 + 82.5 + 21.625, 175)
+	button:SetColor( Color( 0, 255, 0 ) )
+
+	function button:Paint( w, h )
+		draw.RoundedBox(4 ,0, 0, 75, 125, Color( 100, 100, 100, 100 ) )
+		draw.RoundedBox(4 ,0, 0 , 75, 125, Color( 10, 10, 10, 100 ) )
+	end
+
+	button.DoClick = function()
+		net.Start("getregen")
+		net.SendToServer()
+		button:SetDisabled(true)
+		self:SetVisible( false )
+		button:SetColor( Color( 255, 0, 0 ) )
+		timer.Simple(45, function() 
+		 	button:SetDisabled(false)
+		 	button:SetColor( Color( 0, 255, 0 ) )
+		 end)
+	end
 
 
 
