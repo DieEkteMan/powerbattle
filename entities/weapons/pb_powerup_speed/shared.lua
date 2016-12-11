@@ -51,7 +51,7 @@ function SWEP:PrimaryAttack()
 	self.Owner:PrintMessage( HUD_PRINTCENTER, "Speed boost enabled!" )
 	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_speed" ) ) end
 
-	timer.Simple(15, function()
+	timer.Simple(45, function()
 	ply:SetWalkSpeed( 250 )
 	ply:SetRunSpeed( 500 )
 	ply:PrintMessage( HUD_PRINTCENTER, "Speed boost ended" )
