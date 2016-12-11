@@ -3,8 +3,8 @@ AddCSLuaFile()
 
 SWEP.Author 						=	"Rowie"
 SWEP.Base 							= "weapon_base"
-SWEP.PrintName 						= "Cloak"
-SWEP.Instructions 					= [[ Shoot to activate! This will cloak you for 15 seconds! Make it count! ]]
+SWEP.PrintName 						= "Health Regen"
+SWEP.Instructions 					= [[ Shoot to activate! This will regen your health]]
 
 SWEP.ViewModel						= "models/weapons/c_357.mdl"
 SWEP.ViewModelFlip 					= false
@@ -46,14 +46,11 @@ end
 
 function SWEP:PrimaryAttack()
 	local ply = self.Owner
-	self.Owner:SetPlayerColor( Vector(255, 255, 255, 3) ) 			
-	self.Owner:SetMaterial( "sprites/heatwave" )
-	self.Owner:PrintMessage( HUD_PRINTCENTER, "Cloak On" )
-	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_cloak" ) ) end
+	self.Owner:PrintMessage( HUD_PRINTCENTER, "Regenerating health" )
+	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_regen" ) ) end
 
-	timer.Simple(15, function()
-	ply:SetMaterial( "models/glass" )
-	ply:PrintMessage( HUD_PRINTCENTER, "You are no longer cloaked!" )
+	timer.Create( "REGEN" ..ply:UserID(), 1, 10, function()
+		ply:SetHealth( math.Clamp( ply:Health() + 10, 1, ply:GetMaxHealth() ) )
 	end)
 end
 

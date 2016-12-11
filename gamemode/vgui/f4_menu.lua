@@ -71,7 +71,7 @@ local PANEL = {
 		button:SetDisabled(true)
 		self:SetVisible( false )
 		button:SetColor( Color( 255, 0, 0 ) )
-		timer.Simple(30, function() 
+		timer.Simple(90, function() 
 		 	button:SetDisabled(false)
 		 	button:SetColor( Color( 0, 255, 0 ) )
 		 end)

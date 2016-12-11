@@ -26,12 +26,12 @@ Made by DieEkteMan & Rowie
 
 
 			POWERUPS IDEAS
-				1. Health regen
-				2. Armor
-				3. Shockwave
-				4. Bomb
+				1. Health regen : ADDED
+				2. Armor 
+				3. Shield : ADDED
+				4. Bomb : ADDED
 				5. Unlimited ammo
-				6. Prophunt ?
+				6. Prophunt : ADDED
 				7. Bloodmoney   ( When active you gain *3 the points for killing someone )
 				8.
 				9.

@@ -2,13 +2,13 @@ SWEP.Author			= "GamerTech13 & Rowie"
 SWEP.Category 		= "SpiderMan"
 SWEP.Contact		= ""
 SWEP.Purpose		= "Allows you to be Spider-Man"
-SWEP.Instructions	= "Left click to web swing\nRight Click to shoot webs"
+SWEP.Instructions	= "Left click to web swing"
 
 SWEP.Spawnable			= false
 SWEP.AdminSpawnable		= true
 SWEP.HoldType 			= "pistol"
 SWEP.PrintName			= "Slinger"			
-SWEP.Slot				= 2
+SWEP.Slot				= 3
 SWEP.SlotPos			= 0
 SWEP.DrawAmmo			= false
 SWEP.DrawCrosshair		= true

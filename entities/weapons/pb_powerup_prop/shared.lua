@@ -3,8 +3,8 @@ AddCSLuaFile()
 
 SWEP.Author 						=	"Rowie"
 SWEP.Base 							= "weapon_base"
-SWEP.PrintName 						= "Cloak"
-SWEP.Instructions 					= [[ Shoot to activate! This will cloak you for 15 seconds! Make it count! ]]
+SWEP.PrintName 						= "Prophunt!"
+SWEP.Instructions 					= [[ Shoot to activate! This will turn you into a prop for 30 seconds! Make it count! ]]
 
 SWEP.ViewModel						= "models/weapons/c_357.mdl"
 SWEP.ViewModelFlip 					= false
@@ -46,14 +46,14 @@ end
 
 function SWEP:PrimaryAttack()
 	local ply = self.Owner
-	self.Owner:SetPlayerColor( Vector(255, 255, 255, 3) ) 			
-	self.Owner:SetMaterial( "sprites/heatwave" )
-	self.Owner:PrintMessage( HUD_PRINTCENTER, "Cloak On" )
-	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_cloak" ) ) end
+	self.Owner:SetPlayerColor( Vector(255, 255, 255, 3) ) 	
+	self.Owner:SetModel( "models/props_junk/plasticbucket001a.mdl" )		
+	
+	if ( SERVER ) then SafeRemoveEntity( self.Owner:StripWeapon( "pb_powerup_prop" ) ) end
 
 	timer.Simple(15, function()
-	ply:SetMaterial( "models/glass" )
-	ply:PrintMessage( HUD_PRINTCENTER, "You are no longer cloaked!" )
+	ply:SetModel( "models/player/kleiner.mdl" )
+	ply:PrintMessage( HUD_PRINTCENTER, "You are no longer a prop!" )
 	end)
 end
 

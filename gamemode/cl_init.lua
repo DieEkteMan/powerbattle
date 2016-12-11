@@ -1,6 +1,7 @@
 include( "shared.lua" )
 include( "vgui/main_menu.lua")
 include( "vgui/f4_menu.lua")
+include( "vgui/df4_menu.lua" )
 include( 'vgui/hud.lua' )
 include( 'vgui/scoreboard.lua' )
 
@@ -41,6 +42,20 @@ net.Receive("f4menu", function()
 		F4Menu:SetVisible( false )
 	else
 		F4Menu:SetVisible( true )
+	end
+
+end)
+// Donator F4
+net.Receive("df4menu", function()
+	if( !DF4Menu ) then
+		DF4Menu = vgui.Create( "df4_menu")
+		DF4Menu:SetVisible(false)
+	end
+
+	if( DF4Menu:IsVisible() ) then
+		DF4Menu:SetVisible( false )
+	else
+		DF4Menu:SetVisible( true )
 	end
 
 end)
