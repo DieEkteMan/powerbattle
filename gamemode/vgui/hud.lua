@@ -5,7 +5,7 @@ function HUD()
 		return
 	end
 	
-	draw.RoundedBox(0, 0, ScrH() - 100, 250, 100, Color(30, 30, 30, 230))
+	draw.RoundedBox(6, 0, ScrH() - 100, 250, 100, Color(30, 30, 30, 230))
 	
 	draw.SimpleText('Health: '..client:Health()..'%','DermaDefaultBold', 10, ScrH() - 90, Color(255, 255, 255, 255), 0, 0)
 	draw.RoundedBox(0, 10, ScrH() - 75, 100 * 2.25, 15, Color(255, 0, 0, 30))
@@ -17,7 +17,7 @@ function HUD()
 	draw.RoundedBox(0, 10, ScrH() - 30, math.Clamp(client:Armor(), 0, 100) * 2.25, 15, Color(0, 0, 255, 255))
 	draw.RoundedBox(0, 10, ScrH() - 30, math.Clamp(client:Armor(), 0, 100) * 2.25, 5, Color(15, 15, 255, 255))
 	
-	draw.RoundedBox(0, 255, ScrH() -70, 125, 70, Color(30, 30, 30, 230))
+	draw.RoundedBox(6, 255, ScrH() -70, 125, 70, Color(30, 30, 30, 230))
 	
 	if(client:GetActiveWeapon():IsValid()) then
 		local curWeapon = client:GetActiveWeapon():GetClass()
@@ -26,7 +26,7 @@ function HUD()
 			draw.SimpleText(client:GetActiveWeapon():GetPrintName(), 'DermaDefaultBold', 260, ScrH() - 60, Color(255, 255, 255, 255), 0, 0)
 		end
 		
-		if(curWeapon != 'weapon_spiderman') then
+		if(curWeapon != 'pb_weapon_slinger') then
 			if (client:GetActiveWeapon():Clip1() != -1) then 
 				draw.SimpleText('Ammo: ' .. client:GetActiveWeapon():Clip1() .. '/' .. client:GetAmmoCount(client:GetActiveWeapon():GetPrimaryAmmoType()), 'DermaDefaultBold', 260, ScrH() - 40, Color(255, 255, 255, 255), 0, 0)
 			else

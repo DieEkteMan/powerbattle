@@ -10,7 +10,7 @@ function GM:ScoreboardShow(ply)
 		ScoreboardDerma:SetDraggable(false)
 		ScoreboardDerma:ShowCloseButton(false)
 		ScoreboardDerma.Paint = function()
-			draw.RoundedBox(5, 0, 0, ScoreboardDerma:GetWide(), ScoreboardDerma:GetTall(), Color(60, 60, 60, 200))
+			draw.RoundedBox(6, 0, 0, ScoreboardDerma:GetWide(), ScoreboardDerma:GetTall(), Color(60, 60, 60, 200))
 		end
 		
 		local PlayerScrollPanel = vgui.Create('DScrollPanel', ScoreboardDerma)
@@ -38,14 +38,25 @@ function GM:ScoreboardShow(ply)
 				draw.SimpleText("Kills: "..v:Frags(), "Font3", PlayerList:GetWide() - 120, 10, Color( 255, 255, 255 ), TEXT_ALIGN_RIGHT)
 				draw.SimpleText("Deaths: "..v:Deaths(), "Font3", PlayerList:GetWide() - 120, 25, Color( 255, 255, 255 ), TEXT_ALIGN_RIGHT)
 				draw.SimpleText("Ping "..v:Ping(), "Font3", PlayerList:GetWide() - 15, 15, Color( 255, 255, 255 ), TEXT_ALIGN_RIGHT)
-				if v:GetUserGroup() == "superadmin" then
+				if v:GetUserGroup() == "Founder" then
 					surface.SetMaterial( Material("icon16/shield.png") )
 					surface.DrawTexturedRect( PlayerList:GetWide() - 95, 15, 16, 16 )
-				elseif v:GetUserGroup() != "superadmin" then
+				elseif v:GetUserGroup() == "SuperAdmin" then
+					surface.SetMaterial( Material("icon16/star.png") )
+					surface.DrawTexturedRect( PlayerList:GetWide() - 95, 15, 16, 16 )
+				elseif v:GetUserGroup() == "Admin" then
+					surface.SetMaterial( Material("icon16/medal_gold_3.png") )
+					surface.DrawTexturedRect( PlayerList:GetWide() - 95, 15, 16, 16 )
+				elseif v:GetUserGroup() == "Moderator" then
+					surface.SetMaterial( Material("icon16/medal_bronze_3.png") )
+					surface.DrawTexturedRect( PlayerList:GetWide() - 95, 15, 16, 16 )
+				elseif v:GetUserGroup() == "Donator" then
+					surface.SetMaterial( Material("icon16/heart.png") )
+					surface.DrawTexturedRect( PlayerList:GetWide() - 95, 15, 16, 16 )
+				elseif v:GetUserGroup() == "user" then
 					surface.SetMaterial( Material("icon16/user.png") )
 					surface.DrawTexturedRect( PlayerList:GetWide() - 95, 15, 16, 16 )
 				end
-				
 				end
 			end
 

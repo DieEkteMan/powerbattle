@@ -270,6 +270,32 @@ local button = vgui.Create( "DButton", self ) // Shrink
 		 end)
 	end
 
+/////////////////////////////////////////////////////////////////////////////
+
+	local button = vgui.Create( "DButton", self ) // Prophunt
+	button:SetFont("DermaDefault")
+	button:SetText( "Armor!" )
+	button:SetDisabled(false)
+	button:SetSize( 70, 50)
+	button:SetPos( 300 + 82.5 + 41.25, 175)
+	button:SetColor( Color( 0, 255, 0 ) )
+
+	function button:Paint( w, h )
+		draw.RoundedBox(4 ,0, 0, 70, 125, Color( 100, 100, 100, 100 ) )
+		draw.RoundedBox(4 ,0, 0 , 70, 125, Color( 10, 10, 10, 100 ) )
+	end
+
+	button.DoClick = function()
+		net.Start("getarmor")
+		net.SendToServer()
+		button:SetDisabled(true)
+		self:SetVisible( false )
+		button:SetColor( Color( 255, 0, 0 ) )
+		timer.Simple(45, function() 
+		 	button:SetDisabled(false)
+		 	button:SetColor( Color( 0, 255, 0 ) )
+		 end)
+	end
 
 
 
