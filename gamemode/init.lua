@@ -63,6 +63,9 @@ function GM:PlayerDeath( victim, inflictor, attacker )
 		PrintMessage( HUD_PRINTCENTER , "You have killed " .. victim:Nick() .. " !" )
 		attacker:ChatPrint( "You've earned POINTSHOPVAR for killing " ..victim:Nick().. " !" )
 	end
+
+	attacker:AddFrags(1) // Scoreboard update fix
+
 end
 
 // F2 Menu
