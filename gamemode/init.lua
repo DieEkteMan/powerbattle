@@ -64,7 +64,7 @@ function GM:PlayerDeath( victim, inflictor, attacker )
 		attacker:ChatPrint( "You've earned POINTSHOPVAR for killing " ..victim:Nick().. " !" )
 	end
 
-	attacker:AddFrags(1) // Scoreboard update fix
+	//attacker:AddFrags(1) // Scoreboard update fix
 
 end
 
