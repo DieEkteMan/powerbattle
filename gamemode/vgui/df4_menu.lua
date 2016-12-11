@@ -169,7 +169,7 @@ local button = vgui.Create( "DButton", self ) // Shrink
 	button:SetText( "Shrink!" )
 	button:SetDisabled(false)
 	button:SetSize( 70, 50)
-	button:SetPos( 300 + 82.5 + 41.25 + 19.985, 100)
+	button:SetPos( 300 + 82.5 + 41.25 + 41.25, 100)
 	button:SetColor( Color( 0, 255, 0 ) )
 
 	function button:Paint( w, h )
@@ -189,11 +189,34 @@ local button = vgui.Create( "DButton", self ) // Shrink
 		 end)
 	end
 	
+///////////////////////////////////////////////////////////////////////////////////
 
+	local button = vgui.Create( "DButton", self ) Bomb
+	button:SetFont("DermaDefault")
+	button:SetText( "Bomb!" )
+	button:SetDisabled(false)
+	button:SetSize( 50, 50)
+	button:SetPos( 135, 200)
+	button:SetColor( Color( 0, 255, 0 ) )
 
+	function button:Paint( w, h )
+		draw.RoundedBox(4 ,0, 0, 50, 125, Color( 100, 100, 100, 100 ) )
+		draw.RoundedBox(4 ,0, 0 , 50, 125, Color( 10, 10, 10, 100 ) )
+	end
 
+	button.DoClick = function()
+		net.Start("getbomb")
+		net.SendToServer()
+		button:SetDisabled(true)
+		self:SetVisible( false )
+		button:SetColor( Color( 255, 0, 0 ) )
+		timer.Simple(30, function() 
+		 	button:SetDisabled(false)
+		 	button:SetColor( Color( 0, 255, 0 ) )
+		 end)
+	end
 
-
+//////////////////////////////////////////////////////////////////////////////////
 
 
 

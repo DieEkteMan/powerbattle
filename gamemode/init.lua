@@ -23,6 +23,7 @@ util.AddNetworkString("getjump")
 util.AddNetworkString("getboost")
 util.AddNetworkString("getprop")
 util.AddNetworkString("getshrunken")
+util.AddNetworkString("getbomb")
 
 
 
@@ -99,11 +100,11 @@ end
 net.Receive("spectator", spectatorteam);
 
 function getpowerup( len, ply ) 
-	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) or ply:HasWeapon( "pb_powerup_shrink" ) then // This will be improved later on
+	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) or ply:HasWeapon( "pb_powerup_shrink" ) or ply:HasWeapon( "pb_powerup_bomb" ) then // This will be improved later on
 		ply:ChatPrint("You still have a powerup left! Use it first before getting a new one!")
 	else
 
-	local number = math.random(1, 5)
+	local number = math.random(1, 6)
 		if number == 1 then
 			ply:Give( "pb_powerup_cloak" )
 		elseif number == 2 then
@@ -114,6 +115,8 @@ function getpowerup( len, ply )
 			ply:Give( "pb_powerup_prop" )
 		elseif number == 5 then
 			ply:Give( "pb_powerup_shrink" )
+		elseif number == 6 then 
+			ply:Give( "pb_powerup_bomb" )
 		end
 	end
 end
@@ -122,7 +125,7 @@ net.Receive( "getpowerup", getpowerup)
 
 // DONATORS CAN CHOOSE WHICH POWERUPS THEY WOULD LIKE TO GET THEREFOR THERE HAVE TO BE MADE SINGLE MESSAGES
 function getcloak( len, ply )
-	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) then // This will be improved later on
+	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) or ply:HasWeapon( "pb_powerup_shrink" ) or ply:HasWeapon( "pb_powerup_bomb" ) then // This will be improved later on
 		ply:ChatPrint("You still have a powerup left! Use it first before getting a new one!")
 	else
 		ply:Give( "pb_powerup_cloak" )
@@ -133,7 +136,7 @@ net.Receive( "getcloak", getcloak )
 
 
 function getjump( len, ply )
-	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) then // This will be improved later on
+	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) or ply:HasWeapon( "pb_powerup_shrink" ) or ply:HasWeapon( "pb_powerup_bomb" ) then // This will be improved later on
 		ply:ChatPrint("You still have a powerup left! Use it first before getting a new one!")
 	else
 		ply:Give( "pb_powerup_jump" )
@@ -144,7 +147,7 @@ net.Receive( "getjump", getjump )
 
 
 function getboost( len, ply )
-	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) then // This will be improved later on
+	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) or ply:HasWeapon( "pb_powerup_shrink" ) or ply:HasWeapon( "pb_powerup_bomb" ) then // This will be improved later on
 		ply:ChatPrint("You still have a powerup left! Use it first before getting a new one!")
 	else
 		ply:Give( "pb_powerup_speed" )
@@ -155,7 +158,7 @@ net.Receive( "getboost", getboost )
 
 
 function getprop( len, ply )
-	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) then // This will be improved later on
+	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) or ply:HasWeapon( "pb_powerup_shrink" ) or ply:HasWeapon( "pb_powerup_bomb" ) then // This will be improved later on
 		ply:ChatPrint("You still have a powerup left! Use it first before getting a new one!")
 	else
 		ply:Give( "pb_powerup_prop" )
@@ -164,13 +167,22 @@ end
 net.Receive( "getprop", getprop )
 
 function shrink( len, ply )
-	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) then // This will be improved later on
+	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) or ply:HasWeapon( "pb_powerup_shrink" ) or ply:HasWeapon( "pb_powerup_bomb" ) then // This will be improved later on
 		ply:ChatPrint("You still have a powerup left! Use it first before getting a new one!")
 	else
 		ply:Give( "pb_powerup_shrink" )
 	end
 end
 net.Receive( "getshrunken", shrink )
+
+function bomb( len, ply )
+	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) or ply:HasWeapon( "pb_powerup_shrink" ) or ply:HasWeapon( "pb_powerup_bomb" ) then // This will be improved later on
+		ply:ChatPrint("You still have a powerup left! Use it first before getting a new one!")
+	else
+		ply:Give( "pb_powerup_bomb" )
+	end
+end
+net.Receive( "getbomb", bomb )
 
 
 
