@@ -80,7 +80,7 @@ function GM:ShowSpare2( ply )
 		if ply:Team() == 3 or ply:Team() == 2 then
 			ply:ChatPrint("Before you can access the Power Up menu you will have to be on the playing team first!")
 		elseif
-		ply:IsUserGroup("donator") or ply:IsAdmin() then
+		ply:IsUserGroup("Donator") or ply:IsAdmin() then
 		net.Start("df4menu")
 		net.Send( ply )
 		else
