@@ -36,9 +36,9 @@ function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome
 		net.Start("f2menu")
 		net.Send(ply)
 
-		timer.Simple(2, function() 
-		net.Start("spectator")
-		net.Send(ply)
+		timer.Simple(2, function()
+		local ply = self.Owner() 
+		self.Owner:GodEnable()
 		end)
 end
 

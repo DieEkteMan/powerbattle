@@ -66,7 +66,7 @@ function SWEP:PrimaryAttack()
             explode:SetPos( ply:GetPos() )
             explode:SetOwner( ply:GetPos() )
             explode:Spawn()
-            explode:SetKeyValue( "iMagnitude", "105" )
+            explode:SetKeyValue( "iMagnitude", "125" )
             explode:Fire( "Explode", 0, 0 )
             explode:EmitSound( "weapon_AWP.Single", 1000, 1000 )
         end
