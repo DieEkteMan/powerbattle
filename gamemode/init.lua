@@ -81,13 +81,6 @@ end
 net.Receive("spectator", spectatorteam);
 
 function getpowerup( len, ply ) // Add a timer on this function so that the player has to wait I.e. 30 sec before pressing again
-<<<<<<< HEAD
-	if math.random(1, 3) == 1 then 
-		ply:Give( "pb_powerup_cloak")
-	elseif math.random(1, 3) == 2 then 
-		ply:Give( "pb_powerup_speed" )
-	elseif math.random(1, 3) == 3 then
-=======
 	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) then
 		ply:ChatPrint("You still have a powerup left! Use it first before getting a new one!")
 	else
@@ -100,7 +93,6 @@ function getpowerup( len, ply ) // Add a timer on this function so that the play
 		elseif number == 3 then
 			ply:Give( "pb_powerup_jump" )
 		end
->>>>>>> refs/remotes/r0wi3/master
 	end
 end
 net.Receive( "getpowerup", getpowerup)
