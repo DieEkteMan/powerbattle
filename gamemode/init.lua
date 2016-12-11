@@ -37,8 +37,7 @@ function GM:PlayerInitialSpawn( ply ) // On the initial spawn we want to welcome
 		net.Send(ply)
 
 		timer.Simple(2, function()
-		local ply = self.Owner() 
-		self.Owner:GodEnable()
+		ply:GodEnable()
 		end)
 end
 
@@ -50,6 +49,19 @@ function GM:PlayerLoadout(ply) // Here you can change the loadout of the teams
 		ply:GiveAmmo(200, 'SMG1', true)
 	elseif ply:Team() == 2 then
 		ply:StripWeapons()
+	end
+end
+
+function GM:PlayerDeath( victim, inflictor, attacker )
+	if ( victim == attacker ) then
+		PrintMessage( HUD_PRINTNOTIFY, victim:Nick() .. " committed suicide." )
+	else 
+		PrintMessage( HUD_PRINTNOTIFY, victim:Nick() .. " was killed by " .. attacker:Nick() )
+	end
+
+	if IsValid(attacker) and attacker:IsPlayer() then
+		PrintMessage( HUD_PRINTCENTER , "You have killed " .. victim:Nick() .. " !" )
+		attacker:ChatPrint( "You've earned POINTSHOPVAR for killing " ..victim:Nick().. " !" )
 	end
 end
 

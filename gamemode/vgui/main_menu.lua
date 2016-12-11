@@ -79,9 +79,25 @@ local PANEL = {
 
 
 	local player = vgui.Create( "DButton", sheet1 ) // Team button
-	player:SetText( "Player" )
-	player:SetSize( 100, 100)
+	player:SetFont("DermaLarge")
+	player:SetText( "I would like to play!" )
+	player:SetSize( 500, 175)
 	player:SetPos( 200, 60)
+
+	function player:Paint( w, h )
+		if( player:IsDown() ) then
+			player:SetColor( Color( 150, 255, 150 ) )
+		elseif( player:IsHovered() ) then 
+			player:SetColor( Color( 0, 255, 0 ) )
+		else
+			player:SetColor( Color( 255, 255, 255 ) )
+		end
+
+		draw.RoundedBox(4 ,0, 0, 500, 175, Color( 100, 100, 100, 100 ) )
+		draw.RoundedBox(4 ,0, 0 , 500, 175, Color( 10, 10, 10, 100 ) )
+
+	end
+
 	player.DoClick = function()
 		net.Start("player")
 		net.SendToServer()
@@ -89,9 +105,25 @@ local PANEL = {
 	end
 
 	local spectator = vgui.Create( "DButton", sheet1 ) // Team Button
-	spectator:SetText( "Spectator" )
-	spectator:SetSize( 100, 100)
-	spectator:SetPos( 600, 60)
+	spectator:SetFont("DermaLarge")
+	spectator:SetText( "I would like to spectate." )
+	spectator:SetSize( 500, 175)
+	spectator:SetPos( 200, 450)
+
+	function spectator:Paint( w, h )
+		if( spectator:IsDown() ) then
+			spectator:SetColor( Color( 255, 0, 0 ) )
+		elseif( spectator:IsHovered() ) then 
+			spectator:SetColor( Color( 255, 0, 0 ) )
+		else
+			spectator:SetColor( Color( 255, 255, 255 ) )
+		end
+
+		draw.RoundedBox(4 ,0, 0, 500, 175, Color( 100, 100, 100, 100 ) )
+		draw.RoundedBox(4 ,0, 0 , 500, 175, Color( 10, 10, 10, 100 ) )
+
+	end
+
 	spectator.DoClick = function()
 		net.Start("spectator")
 		net.SendToServer()
