@@ -31,16 +31,13 @@ function GM:ShowTeam(ply)
 		net.Send(ply)
 end
 
-net.Receive("player", function() // Team 1 
-	if pl:IsPlayer() then
-
-	pl:SetTeam(1)
-	pl:ChatPrint("You've been put into the playing team!")
-	pl:Spawn()
-	end 
+net.Receive("player", function(ply) // Team 1 
+	ply:SetTeam(1)
+	ply:ChatPrint("You've been put into the playing team!")
+	ply:Spawn()
 end)
 
-net.Receive("spectator", function() // Team 2
+net.Receive("spectator", function(ply) // Team 2
 	ply:SetTeam(2)
 	ply:StripWeapons()
 	ply:ChatPrint("You are now spectating")
