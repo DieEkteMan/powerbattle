@@ -190,20 +190,6 @@ function getprop( len, ply )
 end
 net.Receive( "getprop", getprop )
 
-<<<<<<< HEAD
-net.Receive("player", function(ply) // Team 1 
-	ply:SetTeam(1)
-	ply:ChatPrint("You've been put into the playing team!")
-	ply:Spawn()
-end)
-
-net.Receive("spectator", function(ply) // Team 2
-	ply:SetTeam(2)
-	ply:StripWeapons()
-	ply:ChatPrint("You are now spectating")
-	ply:Spectate(OBS_MODE_ROAMING)
-end)
-=======
 function shrink( len, ply )
 	if ply:HasWeapon( "pb_powerup_cloak" ) or ply:HasWeapon( "pb_powerup_speed" ) or ply:HasWeapon( "pb_powerup_jump" ) or ply:HasWeapon( "pb_powerup_prop" ) or ply:HasWeapon( "pb_powerup_shrink" ) or ply:HasWeapon( "pb_powerup_bomb" ) or ply:HasWeapon( "pb_powerup_shield") or ply:HasWeapon( "pb_powerup_regen" ) or ply:HasWeapon( "pb_powerup_armor" ) then // This will be improved later on
 		ply:ChatPrint("You still have a powerup left! Use it first before getting a new one!")
@@ -275,4 +261,3 @@ for _, v in pairs (hooks) do // Disable spawning
 end
 
 
->>>>>>> origin/master
