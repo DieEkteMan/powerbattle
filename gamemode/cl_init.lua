@@ -1,35 +1,66 @@
 include( "shared.lua" )
+include( "vgui/main_menu.lua")
+include( "vgui/f4_menu.lua")
+include( "vgui/df4_menu.lua" )
+include( 'vgui/hud.lua' )
+include( 'vgui/scoreboard.lua' )
 
-// Derma menu to choose team
-net.Receive("menu", function()
- 
-local frame = vgui.Create( "DFrame" )
-frame:SetPos(500, 500) 
-frame:SetSize( 500, 385 )
-frame:SetTitle( "Change Team" )
-frame:SetVisible( true )
-frame:SetDraggable( false )
-frame:ShowCloseButton( false )
-frame:MakePopup()
- 
-team_1 = vgui.Create( "DButton", frame ) // Team 1 = 2 || Team 2 = 3
-team_1:SetPos( frame:GetTall() / 2, 5 )
-team_1:SetSize( 50, 100 )
-team_1:SetText( "Player Team" )
-team_1.DoClick = function() 
-    net.Start("player")
-    net.SendToServer()
-    frame:Close()
-end
- 
-team_2 = vgui.Create( "DButton", frame )
-team_2:SetPos( frame:GetTall() / 2, 105 ) 
-team_2:SetSize( 50, 100 )
-team_2:SetText( "Spectate" )
-team_2.DoClick = function()
-    net.Start("spectator")
-    net.SendToServer()
-    frame:Close()
+function GM:ContextMenuOpen()
+	return false
 end
 
+local function DisallowSpawnMenu( )
+	if not LocalPlayer():IsAdmin() then
+		return false
+	end
+end
+ 
+hook.Add( "SpawnMenuOpen", "DisallowSpawnMenu", DisallowSpawnMenu)
+// F2 Menu
+net.Receive("f2menu", function()
+	if( !MainMenu ) then
+		MainMenu = vgui.Create( "main_menu")
+		MainMenu:SetVisible(false)
+	end
+
+	if( MainMenu:IsVisible() ) then
+		MainMenu:SetVisible( false )
+	else
+		MainMenu:SetVisible( true )
+	end
+
+end)
+
+// F4 Menu
+net.Receive("f4menu", function()
+	if( !F4Menu ) then
+		F4Menu = vgui.Create( "f4_menu")
+		F4Menu:SetVisible(false)
+	end
+
+	if( F4Menu:IsVisible() ) then
+		F4Menu:SetVisible( false )
+	else
+		F4Menu:SetVisible( true )
+	end
+
+end)
+// Donator F4
+net.Receive("df4menu", function()
+	if( !DF4Menu ) then
+		DF4Menu = vgui.Create( "df4_menu")
+		DF4Menu:SetVisible(false)
+	end
+
+	if( DF4Menu:IsVisible() ) then
+		DF4Menu:SetVisible( false )
+	else
+		DF4Menu:SetVisible( true )
+	end
+
+end)
+
+net.Receive("welcomemsg", function()
+	local ply = LocalPlayer()
+	chat.AddText( Color( 100, 100, 255 ), "Welcome to our Power Battle Server! We hope you enjoy your stay!")
 end)
